@@ -1,0 +1,180 @@
+/*반응형 토큰 (Responsive Tokens)*/
+/* 모바일 기본값 */
+:root {
+  /* Layout */
+  --container-max-width: 100%;
+  --container-padding-x: clamp(16px, 4vw, 32px);
+  
+  /* Grid */
+  --grid-columns: 4;
+  --grid-gap: clamp(12px, 2.5vw, 20px);
+  
+  /* Typography Scale */
+  --font-size-display-1: var(--font-size-3xl);
+  --font-size-display-2: var(--font-size-2xl);
+  --font-size-display-3: var(--font-size-xl);
+  
+  /* Spacing Scale */
+  --space-section: clamp(32px, 6vh, 80px);
+  --space-container: var(--space-4);
+  
+  /* Component Scale */
+  --modal-margin: var(--space-4);
+  --card-columns: 1;
+}
+
+/* 중간 화면 (768px 이상) */
+@media (min-width: 768px) {
+  :root {
+    /* Layout */
+    --container-max-width: 100%;
+    /* --container-padding-x: removed - using clamp() in root */
+    
+    /* Grid */
+    --grid-columns: 8;
+    /* --grid-gap: removed - using clamp() in root */
+    
+    /* Typography Scale */
+    --font-size-display-1: var(--font-size-4xl);
+    --font-size-display-2: var(--font-size-3xl);
+    --font-size-display-3: var(--font-size-2xl);
+    
+    /* Spacing Scale */
+    /* --space-section: removed - using clamp() in root */
+    --space-container: var(--space-6);
+    
+    /* Component Scale */
+    --modal-margin: var(--space-8);
+    --card-columns: 2;
+  }
+}
+
+/* 데스크톱 (912px 이상) - 3열 그리드 */
+@media (min-width: 912px) {
+  :root {
+    /* Component Scale */
+    --card-columns: 3;
+  }
+}
+
+/* 데스크톱 (1024px 이상) */
+@media (min-width: 1024px) {
+  :root {
+    /* Layout */
+    --container-max-width: 1024px;
+    /* --container-padding-x: removed - using clamp() in root */
+    
+    /* Grid */
+    --grid-columns: 12;
+    /* --grid-gap: removed - using clamp() in root */
+    
+    /* Typography Scale */
+    --font-size-display-1: var(--font-size-5xl);
+    --font-size-display-2: var(--font-size-4xl);
+    --font-size-display-3: var(--font-size-3xl);
+    
+    /* Spacing Scale */
+    /* --space-section: removed - using clamp() in root */
+    --space-container: var(--space-8);
+    
+    /* Component Scale */
+    --modal-margin: var(--space-10);
+    --card-columns: 3;
+  }
+}
+
+/* 큰 데스크톱 (1280px 이상) */
+@media (min-width: 1280px) {
+  :root {
+    /* Layout */
+    --container-max-width: 1200px;
+    /* --container-padding-x: removed - using clamp() in root */
+    
+    /* Component Scale */
+    --card-columns: 3; /* 3열 고정 */
+  }
+}
+
+/* 초대형 화면 (1536px 이상) */
+@media (min-width: 1536px) {
+  :root {
+    /* Layout */
+    --container-max-width: 1400px;
+  }
+}
+
+/* 반응형 유틸리티 토큰 */
+:root {
+  /* 현재 브레이크포인트 표시 (JavaScript에서 사용) */
+  --current-breakpoint: 'mobile';
+}
+
+@media (min-width: 640px) {
+  :root {
+    --current-breakpoint: 'sm';
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --current-breakpoint: 'md';
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --current-breakpoint: 'lg';
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --current-breakpoint: 'xl';
+  }
+}
+
+@media (min-width: 1536px) {
+  :root {
+    --current-breakpoint: '2xl';
+  }
+}
+
+/* 반응형 컴포넌트 토큰 */
+@media (max-width: var(--breakpoint-md)) {
+  :root {
+    /* 모바일 전용 */
+    --header-height: var(--header-height-mobile);
+    --sidebar-width: 0;
+    --sidebar-width-open: 80%;
+    
+    /* 모바일 그리드 간격 - 더 작게 */
+    --card-grid-gap-horizontal: var(--space-4); /* 32px */
+    --card-grid-gap-vertical: var(--space-6); /* 48px */
+  }
+}
+
+@media (min-width: var(--breakpoint-md)) and (max-width: calc(var(--breakpoint-lg) - 1px)) {
+  :root {
+    /* 태블릿 전용 */
+    --sidebar-width: var(--sidebar-width-collapsed);
+    
+    /* 태블릿 그리드 간격 - 중간 크기 */
+    --card-grid-gap-horizontal: var(--space-8); /* 64px */
+    --card-grid-gap-vertical: var(--space-10); /* 80px */
+  }
+}
+
+/* 인쇄 미디어 */
+@media print {
+  :root {
+    /* 인쇄용 설정 */
+    --color-primary: var(--color-black);
+    --text-primary: var(--color-black);
+    --bg-page: var(--color-white);
+    --bg-surface: var(--color-white);
+    --shadow-none: none;
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+  }
+}

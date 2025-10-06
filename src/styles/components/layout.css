@@ -1,0 +1,218 @@
+/*레이아웃 컴포넌트 스타일*/
+/* ===== Main Layout ===== */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout__header {
+  flex-shrink: 0;
+}
+
+.layout__main {
+  flex: 1;
+  width: 100%;
+}
+
+.layout__footer {
+  flex-shrink: 0;
+}
+
+/* With Sidebar */
+.layout--with-sidebar {
+  /* 사이드바가 있는 레이아웃 */
+}
+
+.layout--with-sidebar .layout__body {
+  display: flex;
+  flex: 1;
+}
+
+.layout__sidebar {
+  flex-shrink: 0;
+  width: var(--sidebar-width);
+}
+
+.layout__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0; /* 플렉스 아이템 오버플로우 방지 */
+}
+
+/* ===== Page Container ===== */
+.page {
+  width: 100%;
+  padding: var(--space-page-padding);
+}
+
+.page__container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+}
+
+.page__header {
+  margin-bottom: var(--space-section-gap);
+}
+
+.page__title {
+  font-size: var(--font-size-display-2);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.page__description {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.page__content {
+  /* 페이지 콘텐츠 영역 */
+}
+
+/* ===== Section ===== */
+.section {
+  margin-bottom: var(--space-section-gap);
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.section__header {
+  margin-bottom: var(--space-element-gap);
+}
+
+.section__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.section__subtitle {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.section__content {
+  /* 섹션 콘텐츠 영역 */
+}
+
+/* ===== Grid Layout ===== */
+.grid {
+  display: grid;
+  gap: var(--grid-gap);
+}
+
+/* Grid Columns */
+.grid--cols-1 {
+  grid-template-columns: 1fr;
+}
+
+.grid--cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Responsive Grid */
+.grid--responsive {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* ===== Flex Layout ===== */
+.flex {
+  display: flex;
+}
+
+.flex--row {
+  flex-direction: row;
+}
+
+.flex--column {
+  flex-direction: column;
+}
+
+.flex--wrap {
+  flex-wrap: wrap;
+}
+
+.flex--center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex--between {
+  justify-content: space-between;
+}
+
+.flex--gap-sm {
+  gap: var(--space-2);
+}
+
+.flex--gap-md {
+  gap: var(--space-4);
+}
+
+.flex--gap-lg {
+  gap: var(--space-6);
+}
+
+/* ===== Stack Layout ===== */
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack--gap-sm {
+  gap: var(--space-2);
+}
+
+.stack--gap-md {
+  gap: var(--space-4);
+}
+
+.stack--gap-lg {
+  gap: var(--space-6);
+}
+
+/* ===== Responsive Utilities ===== */
+@media (max-width: var(--breakpoint-mobile)) {
+  /* 모바일 */
+  /* .page 패딩은 clamp()로 이미 자동 처리됨 */
+  
+  .grid--cols-2,
+  .grid--cols-3,
+  .grid--cols-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .layout__sidebar {
+    display: none;
+  }
+}
+
+@media (min-width: var(--breakpoint-tablet)) and (max-width: calc(var(--breakpoint-desktop) - 1px)) {
+  /* 태블릿 */
+  .grid--cols-3,
+  .grid--cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: var(--breakpoint-desktop)) {
+  /* 데스크톱 */
+  /* .page 패딩은 clamp()로 이미 자동 처리됨 */
+}

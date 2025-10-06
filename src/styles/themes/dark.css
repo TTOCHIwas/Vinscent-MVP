@@ -1,0 +1,168 @@
+/*다크 테마 스타일*/
+
+/* 자동 다크 모드 (시스템 설정 따름) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Text Colors */
+    --text-primary: var(--color-gray-100);
+    --text-secondary: var(--color-gray-300);
+    --text-muted: var(--color-gray-500);
+    --text-disabled: var(--color-gray-600);
+    
+    /* Background Colors */
+    --bg-page: #0a0a0a;
+    --bg-surface: var(--color-gray-900);
+    --bg-surface-hover: var(--color-gray-800);
+    --bg-surface-active: var(--color-gray-700);
+    --bg-input: var(--color-gray-800);
+    --bg-input-hover: var(--color-gray-700);
+    --bg-input-focus: var(--color-gray-900);
+    
+    /* Border Colors */
+    --border-light: var(--color-gray-800);
+    --border-medium: var(--color-gray-700);
+    --border-heavy: var(--color-gray-600);
+    
+    /* Brand Colors (더 밝게 조정) */
+    --color-primary: var(--color-purple-400);
+    --color-primary-hover: var(--color-purple-300);
+    --color-primary-active: var(--color-purple-500);
+    --color-primary-light: rgba(192, 132, 252, 0.2);
+    
+    /* Status Colors (더 밝게 조정) */
+    --color-success-light: rgba(16, 185, 129, 0.2);
+    --color-warning-light: rgba(245, 158, 11, 0.2);
+    --color-error-light: rgba(239, 68, 68, 0.2);
+    --color-info-light: rgba(59, 130, 246, 0.2);
+    
+    /* Shadows (더 진하게) */
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    
+    /* Modal Backdrop */
+    --modal-backdrop-bg: rgba(0, 0, 0, 0.8);
+  }
+  
+  /* 이미지 밝기 조정 */
+  img,
+  video {
+    opacity: 0.9;
+  }
+  
+  /* 코드 블록 색상 */
+  pre,
+  code {
+    background-color: var(--color-gray-900);
+    color: var(--color-gray-100);
+  }
+}
+
+/* 수동 다크 모드 (클래스로 제어) */
+.theme-dark {
+  /* Text Colors */
+  --text-primary: var(--color-gray-100);
+  --text-secondary: var(--color-gray-300);
+  --text-muted: var(--color-gray-500);
+  --text-disabled: var(--color-gray-600);
+  
+  /* Background Colors */
+  --bg-page: #0a0a0a;
+  --bg-surface: var(--color-gray-900);
+  --bg-surface-hover: var(--color-gray-800);
+  --bg-surface-active: var(--color-gray-700);
+  --bg-input: var(--color-gray-800);
+  --bg-input-hover: var(--color-gray-700);
+  --bg-input-focus: var(--color-gray-900);
+  
+  /* Border Colors */
+  --border-light: var(--color-gray-800);
+  --border-medium: var(--color-gray-700);
+  --border-heavy: var(--color-gray-600);
+  
+  /* Brand Colors */
+  --color-primary: var(--color-purple-400);
+  --color-primary-hover: var(--color-purple-300);
+  --color-primary-active: var(--color-purple-500);
+  --color-primary-light: rgba(192, 132, 252, 0.2);
+
+  --color-dark-card-hover: var(--color-gray-800);
+
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  
+  /* Modal Backdrop */
+  --modal-backdrop-bg: rgba(0, 0, 0, 0.8);
+}
+
+.theme-dark img,
+.theme-dark video {
+  opacity: 0.9;
+}
+
+.theme-dark pre,
+.theme-dark code {
+  background-color: var(--color-gray-900);
+  color: var(--color-gray-100);
+}
+
+/* 다크 모드 전용 조정 */
+@media (prefers-color-scheme: dark) {
+  /* 스크롤바 스타일 */
+  ::-webkit-scrollbar {
+    background-color: var(--bg-surface);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-gray-700);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-gray-600);
+  }
+  
+  /* 선택 영역 색상 */
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--text-on-primary);
+  }
+  
+  /* 입력 필드 자동완성 배경색 */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 100px var(--bg-input) inset;
+    -webkit-text-fill-color: var(--text-primary);
+  }
+}
+
+/* 다크 모드 컴포넌트별 조정 */
+@media (prefers-color-scheme: dark) {
+  /* Card 조정 */
+  .card {
+    background-color: var(--bg-surface);
+  }
+
+  .card--variant-elevated {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Button 조정 */
+  .button--variant-secondary {
+    border-color: var(--border-medium);
+  }
+  
+  .button--variant-ghost:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Modal 조정 */
+  .modal__content {
+    border: 1px solid var(--border-light);
+  }
+}

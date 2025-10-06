@@ -1,0 +1,51 @@
+
+/* ===== 헤더 컨테이너 ===== */
+.header {
+  position: relative;
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--bg-surface);
+  z-index: var(--z-index-sticky);
+}
+
+/* ===== 헤더 내부 컨테이너 ===== */
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+/* ===== 로고 ===== */
+.header__logo {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-family-logo);
+  font-size: var(--font-size-logo-responsive);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  text-decoration: none !important;
+  transition: var(--transition-transform);
+}
+
+/* ===== 네비게이션 ===== */
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.header__link {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: var(--transition-colors);
+}
+
+.header__link:hover {
+  color: var(--text-primary);
+}

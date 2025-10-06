@@ -1,0 +1,293 @@
+/*Button 컴포넌트 스타일*/
+/* ===== Base Button ===== */
+.button {
+  /* 구조 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  position: relative;
+  
+  /* 크기 */
+  height: var(--button-height-md);
+  padding: 0 var(--button-padding-x-md);
+  
+  /* 타이포그래피 */
+  font-family: inherit;
+  font-size: var(--button-font-size-md);
+  font-weight: var(--button-font-weight);
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  
+  /* 시각 */
+  color: var(--text-on-primary);
+  background-color: var(--color-primary);
+  
+  /* 인터랙션 */
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition: var(--transition-all);
+  
+  /* 기타 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Hover - 미니멀 접근법: 기본 상태 유지 */
+.button:hover:not(:disabled):not(.is-disabled) {
+  /* 의도적으로 비우기: 커서는 기본 .button 클래스에서 이미 pointer로 설정됨 */
+  /* 기존의 색상 변경, 이동, 그림자 효과 모두 제거 */
+}
+
+/* Active */
+.button:active:not(:disabled):not(.is-disabled) {
+  background-color: var(--color-primary-active);
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Focus */
+.button:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+/* ===== Elements ===== */
+.button__icon {
+  width: 1.25em;
+  height: 1.25em;
+  flex-shrink: 0;
+}
+
+.button__text {
+  flex-shrink: 0;
+}
+
+.button__spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* ===== Size Variants ===== */
+.button--size-xxs {
+  height: var(--button-height-xxs);
+  width: auto;
+  padding: 0;
+  font-size: var(--button-font-size-xxs);
+}
+
+.button--size-xs {
+  height: var(--button-height-xs);
+  padding: 0 var(--button-padding-x-xs);
+  font-size: var(--button-font-size-xs);
+}
+
+.button--size-sm {
+  height: var(--button-height-sm);
+  padding: 0 var(--button-padding-x-sm);
+  font-size: var(--button-font-size-sm);
+}
+
+.button--size-lg {
+  height: var(--button-height-lg);
+  padding: 0 var(--button-padding-x-lg);
+  font-size: var(--button-font-size-lg);
+}
+
+.button--size-xl {
+  height: var(--button-height-xl);
+  padding: 0 var(--button-padding-x-xl);
+  font-size: var(--button-font-size-xl);
+}
+
+/* ===== Style Variants ===== */
+
+/* Secondary */
+.button--variant-secondary {
+  color: var(--text-primary);
+  background-color: transparent;
+  border-color: var(--border-medium);
+}
+
+.button--variant-secondary:hover:not(:disabled):not(.is-disabled) {
+}
+
+.button--variant-secondary:active:not(:disabled):not(.is-disabled) {
+  background-color: var(--bg-surface-active);
+}
+
+/* Ghost */
+.button--variant-ghost {
+  color: var(--text-primary);
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.button--variant-ghost:hover:not(:disabled):not(.is-disabled) {
+}
+
+.button--variant-ghost:active:not(:disabled):not(.is-disabled) {
+  background-color: var(--bg-surface-active);
+}
+
+/* Danger */
+.button--variant-danger {
+  background-color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+.button--variant-danger:hover:not(:disabled):not(.is-disabled) {
+}
+
+.button--variant-danger:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-error-light);
+}
+
+/* Link */
+.button--variant-link {
+  height: fit-content;
+  color: var(--color-tiny-black);
+  background-color: transparent;
+  text-decoration: none;
+  border-width: 0 0 var(--radius-xs) 0;
+  border-color: var(--border-tiny-black);
+  transition: var(--transition-slow);
+}
+
+.button--variant-link:hover:not(:disabled):not(.is-disabled) {
+}
+
+.button--variant-link:active:not(:disabled):not(.is-disabled) {
+  background-color: transparent;
+  text-decoration: none;
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ===== States ===== */
+
+/* Disabled */
+.button:disabled,
+.button.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Loading */
+.button.is-loading {
+  color: transparent;
+  pointer-events: none;
+}
+
+.button.is-loading .button__icon,
+.button.is-loading .button__text {
+  visibility: hidden;
+}
+
+.button.is-loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1em;
+  height: 1em;
+  margin: -0.5em 0 0 -0.5em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+.button--variant-secondary.is-loading::after,
+.button--variant-ghost.is-loading::after {
+  border-color: var(--text-primary);
+  border-right-color: transparent;
+}
+
+/* ===== Special Modifiers ===== */
+
+/* Full Width */
+.button--full {
+  width: 100%;
+}
+
+/* Icon Only */
+.button--icon-only {
+  padding: 0;
+  width: var(--button-height-md);
+}
+
+.button--size-xs.button--icon-only {
+  width: var(--button-height-xs);
+}
+
+.button--size-sm.button--icon-only {
+  width: var(--button-height-sm);
+}
+
+.button--size-lg.button--icon-only {
+  width: var(--button-height-lg);
+}
+
+.button--size-xl.button--icon-only {
+  width: var(--button-height-xl);
+}
+
+/* ===== Button Group ===== */
+.button-group {
+  display: inline-flex;
+  gap: var(--space-2);
+}
+
+.button-group--attached {
+  gap: 0;
+}
+
+.button-group--attached .button {
+  border-radius: 0;
+}
+
+.button-group--attached .button:first-child {
+  border-top-left-radius: var(--button-border-radius);
+  border-bottom-left-radius: var(--button-border-radius);
+}
+
+.button-group--attached .button:last-child {
+  border-top-right-radius: var(--button-border-radius);
+  border-bottom-right-radius: var(--button-border-radius);
+}
+
+.button-group--attached .button:not(:last-child) {
+  border-right-width: 0;
+}
+
+/* Vertical Button Group */
+.button-group--vertical {
+  flex-direction: column;
+}
+
+.button-group--vertical.button-group--attached .button:first-child {
+  border-radius: 0;
+  border-top-left-radius: var(--button-border-radius);
+  border-top-right-radius: var(--button-border-radius);
+}
+
+.button-group--vertical.button-group--attached .button:last-child {
+  border-radius: 0;
+  border-bottom-left-radius: var(--button-border-radius);
+  border-bottom-right-radius: var(--button-border-radius);
+}
+
+.button-group--vertical.button-group--attached .button:not(:last-child) {
+  border-right-width: var(--button-border-width);
+  border-bottom-width: 0;
+}

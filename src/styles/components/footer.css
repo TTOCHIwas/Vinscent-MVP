@@ -1,0 +1,164 @@
+/* ===== 푸터 컨테이너 ===== */
+.footer {
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--border-light);
+  padding: var(--space-12) 0 var(--space-8);
+}
+
+.footer__container {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+/* ===== 메인 콘텐츠 ===== */
+.footer__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: var(--space-8);
+}
+
+/* ===== 브랜드 섹션 ===== */
+.footer__main {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.footer__brand__div {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer__logo {
+  font-family: var(--font-family-logo);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-600);
+  text-decoration: none !important;
+}
+.divier{
+  width: 2px;
+  height: 2em;
+  background-color: var(--color-gray-600);
+  align-self: center;
+}
+
+.footer__tagline {
+  font-size: var(--font-size-base);
+  color: var(--color-gray-600);
+  margin-bottom: var(--space-3);
+  line-height: var(--line-height-relaxed);
+}
+
+.footer__description {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+  line-height: var(--line-height-relaxed);
+}
+.footer__sub {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+}
+
+/* ===== 네비게이션 ===== */
+.footer__nav {
+  display: flex;
+  gap: var(--space-8);
+}
+
+.footer__nav-link {
+  font-size: var(--font-size-base);
+  color: var(--color-gray-600);
+  text-decoration: none;
+  transition: var(--transition-colors);
+}
+
+.footer__nav-link:hover {
+  color: var(--text-primary);
+  text-decoration: none !important;
+}
+
+/* ===== 소셜 링크 ===== */
+.footer__social {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-1);
+}
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: var(--transition-colors);
+}
+
+.footer__social-icon {
+  color: var(--text-muted);
+  transition: var(--transition-colors);
+}
+
+.footer__social-link:hover {
+ text-decoration: none !important;
+}
+
+
+/* ===== 미니멀 버전 ===== */
+.footer--minimal {
+  padding: var(--space-4) 0;
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--border-light);
+}
+
+.footer__container--minimal {
+  text-align: center;
+}
+
+.footer__copyright-text {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+/* ===== 반응형 ===== */
+@media (max-width: 768px) {
+  .footer__brand__div{
+    flex-direction: column;
+    align-items: start;
+  }
+  .divier , .footer__tagline, .footer__description{
+    display:none;
+  }
+  .footer__main{
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .footer__sub{
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .footer__content {
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .footer__nav {
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .footer__social {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

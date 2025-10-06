@@ -1,0 +1,66 @@
+/**
+ * 홈페이지 섹션 레이아웃 스타일
+ * 
+ * 사용처: src/app/page.tsx
+ * 목적: 각 섹션의 간격과 레이아웃 정의
+ */
+
+/* 메인 페이지 컨테이너 */
+.main-page {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(64px, 14vh, 200px);
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* 히어로 섹션 */
+.hero-section {
+  width: 100%;
+  /* HeroSlide 컴포넌트가 자체적으로 높이 관리 */
+}
+
+/* 매거진 캐러셀 섹션 */
+.magazine-carousel-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 clamp(16px, 4vw, 32px); /* 매거진 페이지와 동일한 좌우 패딩 */
+}
+
+/* Introduction 섹션 */
+.introduction-section {
+  width: 100%;
+  padding: clamp(48px, 8vh, 100px) clamp(16px, 4vw, 32px); /* 상하 패딩 + 좌우 패딩 */
+  background: var(--bg-surface);
+}
+
+/* 향후 추가 섹션들 */
+.featured-products-section,
+.popular-brands-section {
+  width: 100%;
+  padding: var(--space-12) clamp(16px, 4vw, 32px); /* 매거진 페이지와 동일한 좌우 패딩 */
+}
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+  .main-page{
+    gap: clamp(0px, 1vh, 48px);
+  }
+  .magazine-carousel-section {
+  }
+
+  .magazine-section {
+    gap: var(--space-6);
+  }
+  
+  .introduction-section {
+    /* clamp()로 이미 반응형이므로 추가 조정 불필요 */
+  }
+  
+  .featured-products-section,
+  .popular-brands-section {
+    padding: clamp(32px, 5vh, 64px) clamp(16px, 4vw, 32px); /* 매거진 페이지와 동일한 좌우 패딩 */
+  }
+}

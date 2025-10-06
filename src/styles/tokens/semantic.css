@@ -1,0 +1,93 @@
+/*시맨틱 토큰 (Semantic Tokens)*/
+:root {
+  /* ===== Brand Colors ===== */
+  --color-primary: var(--color-gray-500);
+  --color-primary-hover: var(--color-gray-600);
+  --color-primary-active: var(--color-gray-700);
+  --color-primary-light: var(--color-gray-100);
+  
+  --color-secondary: var(--color-gray-500);
+  --color-secondary-hover: var(--color-gray-600);
+  --color-secondary-active: var(--color-gray-700);
+  --color-secondary-light: var(--color-gray-100);
+  
+  --color-tiny-black: var(--color-gray-990);
+
+  /* ===== Text Colors ===== */
+  --text-primary: var(--color-black);
+  --text-secondary: var(--color-gray-400);
+  --text-muted: var(--color-gray-500);
+  --text-disabled: var(--color-gray-400);
+  --text-on-primary: var(--color-white);
+  --text-on-secondary: var(--color-white);
+  
+  /* ===== Background Colors ===== */
+  --bg-page: var(--color-white);
+  --bg-surface: var(--color-white);
+  --bg-surface-hover: var(--color-gray-50);
+  --bg-surface-active: var(--color-gray-100);
+  --bg-input: var(--color-gray-100);
+  --bg-input-hover: var(--color-gray-200);
+  --bg-input-focus: var(--color-white);
+  
+  /* ===== Border Colors ===== */
+  --border-light: var(--color-gray-200);
+  --border-medium: var(--color-gray-300);
+  --border-heavy: var(--color-gray-400);
+  --border-focus: var(--color-primary);
+  --border-error: var(--color-gray-500);
+  --border-tiny-black: var(--color-gray-990);
+  --border-base: var(--color-black);
+  --border-white: var(--color-white);
+  
+  /* ===== Status Colors ===== */
+  --color-success: var(--color-gray-500);
+  --color-success-hover: var(--color-gray-600);
+  --color-success-light: #var(--color-white);
+  
+  --color-warning: var(--color-gray-500);
+  --color-warning-hover: var(--color-gray-600);
+  --color-warning-light: var(--color-white);
+  
+  --color-error: var(--color-gray-500);
+  --color-error-hover: var(--color-gray-600);
+  --color-error-light: var(--color-white);
+  
+  --color-info: var(--color-gray-500);
+  --color-info-hover: var(--color-gray-600);
+  --color-info-light: var(--color-white);
+
+  --color-card-hover: var(--color-gray-800);
+  
+  /* ===== Layout Spacing ===== */
+  --space-page-padding: var(--container-padding-x);
+  --space-section-gap: var(--space-section);
+  --space-element-gap: var(--space-6);
+  --space-component-gap: var(--space-4);
+  --space-text-gap: var(--space-3);
+  
+  /* ===== Layout Constraints ===== */
+  --content-max-width: 1200px;
+  --container-max-width: 1400px;
+  
+  /* ===== Breakpoint Aliases ===== */
+  --breakpoint-mobile: 767px;   /* Mobile max-width (768px min-width for tablet) */
+  --breakpoint-tablet: var(--breakpoint-md);   /* 768px */
+  --breakpoint-desktop: var(--breakpoint-lg);  /* 1024px */
+  --breakpoint-wide: var(--breakpoint-xl);     /* 1280px */
+  
+  /* ===== Typography Optimization ===== */
+  /* 🔧 한국어(CJK) 최적화: 1.5 → 1.6 행간으로 가독성 향상 */
+  --line-height-optimized: var(--line-height-cjk);  /* 1.6 - 한국어 최적화 */
+  --line-height-body: var(--line-height-cjk);       /* 본문 텍스트 전용 */
+  --line-height-interface: var(--line-height-normal); /* UI 요소는 기존 유지 */
+  
+  /* ===== Common Transitions ===== */
+  --transition-colors: color var(--transition-fast), 
+                      background-color var(--transition-fast), 
+                      border-color var(--transition-fast);
+  --transition-transform: transform var(--transition-normal);
+  --transition-shadow: box-shadow var(--transition-normal);
+  --transition-all: all var(--transition-normal);
+}
+

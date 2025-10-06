@@ -1,0 +1,369 @@
+/*Form 컴포넌트 스타일*/
+/* ===== Form Container ===== */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--form-group-gap);
+}
+
+.form--inline {
+  flex-direction: row;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+/* ===== Form Group ===== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.form-group--horizontal {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* ===== Form Label ===== */
+.form-label {
+  display: inline-block;
+  font-size: var(--font-size-base);  /* 🔧 14px → 16px 가독성 개선 */
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  margin-bottom: var(--form-label-margin-bottom);
+  line-height: var(--line-height-body); /* 🔧 한국어 최적화 행간 적용 */
+}
+
+.form-label--required::after {
+  content: ' *';
+  color: var(--color-error);
+}
+
+/* ===== Base Input Styles ===== */
+.input {
+  /* 구조 */
+  display: block;
+  width: 100%;
+  
+  /* 크기 */
+  height: var(--input-height-md);
+  padding: 0 var(--input-padding-x);
+  
+  /* 타이포그래피 */
+  font-family: inherit;
+  font-size: var(--input-font-size-md);
+  line-height: var(--line-height-normal);
+  
+  /* 시각 */
+  color: var(--text-primary);
+  background-color: var(--bg-input);
+  border: var(--input-border-width) solid var(--border-light);
+  border-radius: var(--input-border-radius);
+  
+  /* 인터랙션 */
+  outline: none;
+  transition: var(--transition-all);
+  
+  /* 기타 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Input Placeholder */
+.input::placeholder {
+  color: var(--text-muted);
+  opacity: 1;
+}
+
+/* Input Hover */
+.input:hover:not(:disabled):not(:read-only) {
+  background-color: var(--bg-input-hover);
+  border-color: var(--border-medium);
+}
+
+/* Input Focus */
+.input:focus:not(:disabled):not(:read-only) {
+  background-color: var(--bg-input-focus);
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 var(--input-focus-ring-offset) var(--color-primary-light);
+}
+
+/* ===== Input Size Variants ===== */
+.input--size-sm {
+  height: var(--input-height-sm);
+  font-size: var(--input-font-size-sm);
+}
+
+.input--size-lg {
+  height: var(--input-height-lg);
+  font-size: var(--input-font-size-lg);
+}
+
+/* ===== Input Style Variants ===== */
+.input--variant-outlined {
+  background-color: transparent;
+}
+
+.input--variant-outlined:focus {
+  background-color: var(--bg-surface);
+}
+
+.input--variant-filled {
+  border-color: transparent;
+  border-bottom-color: var(--border-medium);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.input--variant-filled:hover:not(:disabled) {
+  border-bottom-color: var(--border-heavy);
+}
+
+.input--variant-filled:focus {
+  border-bottom-color: var(--border-focus);
+  border-bottom-width: 2px;
+  padding-bottom: calc(var(--input-padding-x) - 1px);
+}
+
+/* ===== Textarea ===== */
+.textarea {
+  /* 상속 */
+  composes: input;
+  
+  /* 덮어쓰기 */
+  min-height: calc(var(--input-height-md) * 2);
+  padding: var(--input-padding-y) var(--input-padding-x);
+  resize: vertical;
+}
+
+.textarea--no-resize {
+  resize: none;
+}
+
+/* ===== Select ===== */
+.select {
+  /* 상속 */
+  composes: input;
+  
+  /* 화살표 아이콘 */
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23737373' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-3) center;
+  background-size: 12px;
+  padding-right: calc(var(--input-padding-x) + 20px);
+  cursor: pointer;
+}
+
+/* ===== Input Group ===== */
+.input-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.input-group__addon {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--input-padding-x);
+  font-size: var(--input-font-size-md);
+  color: var(--text-secondary);
+  background-color: var(--bg-surface-hover);
+  border: var(--input-border-width) solid var(--border-light);
+}
+
+.input-group__addon--start {
+  border-right: 0;
+  border-radius: var(--input-border-radius) 0 0 var(--input-border-radius);
+}
+
+.input-group__addon--end {
+  border-left: 0;
+  border-radius: 0 var(--input-border-radius) var(--input-border-radius) 0;
+}
+
+.input-group .input {
+  border-radius: 0;
+  flex: 1;
+}
+
+.input-group .input:first-child {
+  border-radius: var(--input-border-radius) 0 0 var(--input-border-radius);
+}
+
+.input-group .input:last-child {
+  border-radius: 0 var(--input-border-radius) var(--input-border-radius) 0;
+}
+
+/* ===== Checkbox & Radio ===== */
+.checkbox,
+.radio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox__input,
+.radio__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkbox__box,
+.radio__box {
+  position: relative;
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: var(--bg-surface);
+  border: 2px solid var(--border-medium);
+  transition: var(--transition-all);
+}
+
+.checkbox__box {
+  border-radius: var(--radius-sm);
+}
+
+.radio__box {
+  border-radius: var(--radius-full);
+}
+
+/* Checkbox/Radio Hover */
+.checkbox:hover .checkbox__box,
+.radio:hover .radio__box {
+  border-color: var(--border-heavy);
+  background-color: var(--bg-surface-hover);
+}
+
+/* Checkbox/Radio Checked */
+.checkbox__input:checked + .checkbox__box,
+.radio__input:checked + .radio__box {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* Checkbox Check Mark */
+.checkbox__input:checked + .checkbox__box::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  width: 4px;
+  height: 8px;
+  border: solid var(--text-on-primary);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Radio Dot */
+.radio__input:checked + .radio__box::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background-color: var(--text-on-primary);
+  border-radius: var(--radius-full);
+  transform: translate(-50%, -50%);
+}
+
+/* Checkbox/Radio Focus */
+.checkbox__input:focus-visible + .checkbox__box,
+.radio__input:focus-visible + .radio__box {
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+/* Checkbox/Radio Label */
+.checkbox__label,
+.radio__label {
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  line-height: var(--line-height-body); /* 🔧 한국어 최적화 행간 적용 */
+}
+
+/* ===== Form States ===== */
+
+/* Disabled */
+.input:disabled,
+.textarea:disabled,
+.select:disabled,
+.input.is-disabled,
+.textarea.is-disabled,
+.select.is-disabled {
+  color: var(--text-disabled);
+  background-color: var(--bg-surface-hover);
+  border-color: var(--border-light);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.checkbox__input:disabled + .checkbox__box,
+.radio__input:disabled + .radio__box {
+  background-color: var(--bg-surface-hover);
+  border-color: var(--border-light);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Read Only */
+.input:read-only,
+.textarea:read-only,
+.input.is-readonly,
+.textarea.is-readonly {
+  background-color: var(--bg-surface);
+  border-style: dashed;
+  cursor: default;
+}
+
+/* Error */
+.input.is-error,
+.textarea.is-error,
+.select.is-error {
+  border-color: var(--border-error);
+}
+
+.input.is-error:focus,
+.textarea.is-error:focus,
+.select.is-error:focus {
+  border-color: var(--border-error);
+  box-shadow: 0 0 0 var(--input-focus-ring-offset) var(--color-error-light);
+}
+
+/* ===== Form Messages ===== */
+.form-help {
+  font-size: var(--font-size-base);  /* 🔧 14px → 16px 가독성 개선 */
+  color: var(--text-secondary);
+  margin-top: var(--form-help-text-margin-top);
+  line-height: var(--line-height-body); /* 🔧 한국어 최적화 행간 적용 */
+}
+
+.form-error {
+  font-size: var(--font-size-base);  /* 🔧 14px → 16px 가독성 개선 */
+  color: var(--color-error);
+  margin-top: var(--form-error-margin-top);
+  line-height: var(--line-height-body); /* 🔧 한국어 최적화 행간 적용 */
+}
+
+/* ===== Form Actions ===== */
+.form-actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.form-actions--end {
+  justify-content: flex-end;
+}
+
+.form-actions--center {
+  justify-content: center;
+}
+
+.form-actions--between {
+  justify-content: space-between;
+}

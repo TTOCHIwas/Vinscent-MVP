@@ -1,0 +1,175 @@
+/*Vinscent 브랜드 테마*/
+
+.theme-vinscent {
+  /* Brand Colors - 향수를 연상시키는 색상 */
+  --color-brand-lavender: #e6d5ff;
+  --color-brand-rose: #ffd5e6;
+  --color-brand-amber: #ffe6d5;
+  --color-brand-sage: #d5ffe6;
+  --color-brand-noir: #1a0f1f;
+  
+  /* Primary Color Override - 라벤더 퍼플 */
+  --color-primary: #9f7aea;
+  --color-primary-hover: #805ad5;
+  --color-primary-active: #6b46c1;
+  --color-primary-light: rgba(159, 122, 234, 0.15);
+  
+  /* Secondary Color - 로즈 골드 */
+  --color-secondary: #d4919b;
+  --color-secondary-hover: #c17982;
+  --color-secondary-active: #ae616a;
+  --color-secondary-light: rgba(212, 145, 155, 0.15);
+  
+  /* Accent Color - 앰버 */
+  --color-accent: #f6ad55;
+  --color-accent-hover: #ed8936;
+  --color-accent-active: #dd6b20;
+  
+  /* Background Colors - 부드러운 톤 */
+  --bg-page: #fdfbff;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f9f7fc;
+  --bg-surface-active: #f3eff8;
+  
+  /* Text Colors - 깊이감 있는 색상 */
+  --text-primary: var(--color-brand-noir);
+  --text-secondary: #4a3c52;
+  --text-muted: #6b5975;
+  
+  /* Special Effects */
+  --gradient-brand: linear-gradient(135deg, var(--color-brand-lavender) 0%, var(--color-brand-rose) 100%);
+  --gradient-premium: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+  
+  /* Typography - 우아한 폰트 설정 */
+  --font-family-display: 'Paperlogy', var(--font-family-base);
+  
+  /* Border Radius - 더 부드러운 모서리 */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  
+  /* Shadows - 부드러운 그림자 */
+  --shadow-sm: 0 2px 8px rgba(159, 122, 234, 0.08);
+  --shadow-md: 0 4px 16px rgba(159, 122, 234, 0.12);
+  --shadow-lg: 0 8px 32px rgba(159, 122, 234, 0.16);
+}
+
+/* 브랜드 테마 컴포넌트 커스터마이징 */
+.theme-vinscent {
+  /* Header 브랜드 스타일 */
+  .header {
+    background: linear-gradient(to bottom, var(--bg-surface) 0%, rgba(255, 255, 255, 0.95) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  .header__logo {
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Button 브랜드 스타일 */
+  .button {
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.025em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .button--variant-primary {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+    box-shadow: 0 4px 14px rgba(159, 122, 234, 0.25);
+  }
+  
+  .button--variant-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(159, 122, 234, 0.35);
+  }
+  
+  /* Card 브랜드 스타일 */
+  .card {
+    border: 1px solid rgba(159, 122, 234, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .card:hover {
+    border-color: rgba(159, 122, 234, 0.2);
+  }
+  
+  .card--product {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card--product::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--gradient-brand);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+  
+  .card--product:hover::before {
+    opacity: 0.1;
+  }
+  
+  /* Badge 프리미엄 스타일 */
+  .badge--premium {
+    background: var(--gradient-premium);
+    color: var(--color-brand-noir);
+    font-weight: var(--font-weight-semibold);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Input 브랜드 스타일 */
+  .input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+  }
+  
+  /* 애니메이션 효과 */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+  
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+}
+
+/* 브랜드 컬러 유틸리티 클래스 */
+.theme-vinscent {
+  .text-brand-lavender { color: var(--color-brand-lavender); }
+  .text-brand-rose { color: var(--color-brand-rose); }
+  .text-brand-amber { color: var(--color-brand-amber); }
+  .text-brand-sage { color: var(--color-brand-sage); }
+  .text-brand-noir { color: var(--color-brand-noir); }
+  
+  .bg-brand-lavender { background-color: var(--color-brand-lavender); }
+  .bg-brand-rose { background-color: var(--color-brand-rose); }
+  .bg-brand-amber { background-color: var(--color-brand-amber); }
+  .bg-brand-sage { background-color: var(--color-brand-sage); }
+  .bg-brand-noir { background-color: var(--color-brand-noir); }
+  
+  .bg-gradient-brand { background: var(--gradient-brand); }
+  .bg-gradient-premium { background: var(--gradient-premium); }
+}

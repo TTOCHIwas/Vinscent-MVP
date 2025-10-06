@@ -1,0 +1,143 @@
+:root {
+  /* Button - 🔧 가독성 개선된 토큰 정의 */
+  --button-height-xxs: 1.5rem;    /* 24px */
+  --button-height-xs: 1.75rem;    /* 28px */
+  --button-height-sm: 2rem;       /* 32px */
+  --button-height-md: 2.5rem;     /* 40px */
+  --button-height-lg: 3rem;       /* 48px */
+  --button-height-xl: 3.5rem;     /* 56px */
+  
+  --button-padding-x-xxs: var(--space-2);
+  --button-padding-x-xs: var(--space-3);
+  --button-padding-x-sm: var(--space-3);
+  --button-padding-x-md: var(--space-4);
+  --button-padding-x-lg: var(--space-5);
+  --button-padding-x-xl: var(--space-6);
+  
+  --button-font-size-xxs: var(--font-size-xs);   /* 12px */
+  --button-font-size-xs: var(--font-size-base);   /* 🔧 14px → 16px 가독성 개선 */
+  --button-font-size-sm: var(--font-size-base);   /* 🔧 14px → 16px 가독성 개선 */
+  --button-font-size-md: var(--font-size-base);   /* 16px */
+  --button-font-size-lg: var(--font-size-lg);     /* 18px */
+  --button-font-size-xl: var(--font-size-xl);     /* 20px */
+  
+  --button-border-width: 1px;
+  --button-font-weight: var(--font-weight-medium);
+  --button-border-radius: var(--radius-md);
+  
+  /* Card */
+  --card-padding: var(--space-4);
+  --card-border-radius: var(--radius-lg);
+  --card-shadow: var(--shadow-sm);
+  --card-shadow-hover: var(--shadow-md);
+  
+  /* Input */
+  --input-height: var(--button-height-md);
+  --input-padding-x: var(--space-3);
+  --input-border-width: 1px;
+  --input-border-radius: var(--radius-md);
+  --input-font-size: var(--font-size-base);
+  
+  /* Modal */
+  --modal-padding: var(--space-6);
+  --modal-border-radius: var(--radius-xl);
+  --modal-max-width-sm: 400px;
+  --modal-max-width-md: 600px;
+  --modal-max-width-lg: 800px;
+  
+  /* Layout - 🚀 반응형 헤더 하이브리드 */
+  --header-height: clamp(4rem, 6vh, 5rem); /* 최소 64px 보장, 최대 80px 제한, 로고와 조화 */
+  --sidebar-width: 16rem;
+  --content-max-width: 1200px;
+
+  /* ===== MagazineCarousel3D 토큰 ===== */
+  /* 캐러셀 고정 크기 - 1:1 정사각형 비율 */
+  --magazine-carousel3d-size: 200px;
+  --magazine-carousel3d-info-min-height: 60px;
+  --magazine-carousel3d-container-min-height: calc(var(--magazine-carousel3d-size) + var(--magazine-carousel3d-info-min-height));
+  --magazine-carousel3d-perspective: 1200px;
+  --magazine-carousel3d-translate-z: 1000px;
+  
+  /* 호버 효과 */
+  --magazine-carousel3d-hover-scale: 1.414; /* √2 비율 */
+  
+  /* 셀 스타일 */
+  --magazine-carousel3d-cell-radius: var(--radius-none);
+  --magazine-carousel3d-cell-shadow: var(--shadow-none);
+  
+  /* 플레이스홀더 텍스트 */
+  --magazine-carousel3d-placeholder-font-size: var(--font-size-2xl); /* 24px */
+  
+  /* 네비게이션 버튼 - 화면 비율 반응형 */
+  --magazine-carousel3d-nav-gap: 70vw;
+  --magazine-carousel3d-nav-font-size: var(--font-size-2xl); /* 20px */
+  --magazine-carousel3d-button-padding-x: 1em;
+  --magazine-carousel3d-button-padding-y: 0.5em;
+  --magazine-carousel3d-button-radius: var(--radius-md); 
+  
+  /* 매거진 정보 */
+  --magazine-carousel3d-info-margin-top: var(--space-5); /* 20px */
+  --magazine-carousel3d-info-title-size: var(--font-size-lg); /* 18px */
+  --magazine-carousel3d-info-brand-size: var(--font-size-sm); /* 14px */
+  --magazine-carousel3d-info-title-margin: var(--space-1-5);
+  
+  /* ===== HeroSlide 토큰 ===== */
+  /* 전체 레이아웃 */
+  --hero-slide-total-height: calc(100vh - var(--header-height));
+  --hero-slide-container-height: calc(100vh - var(--header-height) * 2);
+  --hero-slide-section-gap: var(--space-5);
+  --hero-slide-progress-section-height: var(--header-height);
+  --hero-slide-progress-section-bg: transparent;
+  --hero-slide-progress-section-padding: var(--space-4);
+  
+  /* 프로그레스 바 */
+  --hero-slide-progress-width-desktop: 40vw;
+  --hero-slide-progress-width-tablet: 300px;
+  --hero-slide-progress-width-mobile: 250px;
+  --hero-slide-progress-height: var(--space-1);
+  --hero-slide-progress-height-desktop: var(--space-1);
+  --hero-slide-progress-height-mobile: 3px;
+  --hero-slide-progress-bg-opacity: 0.3;
+  
+  /* 경계선 */
+  --border-white: rgba(255, 255, 255, 0.3);
+  
+  /* 🎨 애니메이션 - 속도 분리 대응 */
+  --transition-carousel: 0.5s; /* 🎨 캠러셀 회전 속도 - 빠르게 */
+  --transition-fade: 0.8s; /* 🎨 fade 효과 속도 - 좀 더 여유롭게 */
+  --magazine-carousel3d-transition: transform var(--transition-carousel) ease;
+  --magazine-carousel3d-fade-transition: opacity var(--transition-carousel) linear, visibility var(--transition-carousel) linear, transform var(--transition-carousel) linear; /* 🎨 캠러셀과 동일한 0.5초 속도 */
+  
+  /* ===== Introduction 토큰 ===== */
+  /* 🔧 현재 아키텍처 패턴 적용: clamp() + vw 기반 반응형 */
+  
+  /* 컨테이너 레이아웃 */
+  --introduction-gap: clamp(var(--space-6), 4vh, var(--space-10));           /* 항목 간 간격 */
+  --introduction-container-padding: clamp(var(--space-4), 3vw, var(--space-8)); /* 컨테이너 패딩 */
+  
+  /* 아이템 레이아웃 - 뷰포트 기반 반응형 */
+  --introduction-item-gap: clamp(var(--space-3), 3vw, var(--space-6));      /* 이미지-텍스트 간격 */
+  --introduction-item-direction-breakpoint: 50vw;                           /* 레이아웃 전환점 */
+  
+  /* 이미지 영역 */
+  --introduction-image-aspect-ratio: 4/3;                                   /* 고정 비율 */
+  --introduction-image-flex-desktop: 0 0 48%;                              /* 데스크톱: 48% */
+  --introduction-image-flex-mobile: 1;                                      /* 모바일: 전체 */
+  --introduction-image-width-mobile: clamp(280px, 85vw, 500px);            /* 모바일 너비 */
+  
+  /* 텍스트 영역 */
+  --introduction-content-flex-desktop: 0 0 48%;                            /* 데스크톱: 48% */
+  --introduction-content-flex-mobile: 1;                                    /* 모바일: 전체 */
+  --introduction-content-gap: clamp(var(--space-2), 1.5vh, var(--space-4)); /* 제목-본문 간격 */
+  
+  /* 최적화된 타이포그래피 반응형 - 🔧 가독성 우선 개선 */
+  --introduction-title-size: var(--font-size-section-title);                          /* 🎨 공통 섹션 title 토큰 사용 (30px → 40px) */
+  --introduction-item-title-size: clamp(var(--font-size-xl), 2.5vw, var(--font-size-3xl));    /* 🔧 20px → 30px 최대 확대 */
+  --introduction-item-description-size: clamp(var(--font-size-base), 1.8vw, var(--font-size-lg)); /* 🔧 16px → 18px 가독성 개선 */
+
+  /* ===== Magazine Detail 간단 토큰 ===== */
+  /* 🎯 데스크톱 1000px 고정, 모바일 반응형 */
+  --magazine-detail-max-width: 1000px;                /* 데스크톱 고정 */
+  --magazine-detail-mobile-width: 95vw;               /* 모바일 화면 활용 */
+  --magazine-detail-tablet-width: 90vw;               /* 태블릿 화면 활용 */
+}

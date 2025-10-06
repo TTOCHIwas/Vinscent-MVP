@@ -1,0 +1,328 @@
+/* ===== 매거진 섹션 컨테이너 ===== */
+.magazine-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-20);
+}
+
+.magazine-section__title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-size-section-title);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  margin-bottom: var(--space-16);
+  color: var(--text-primary);
+  width: 100%;
+  letter-spacing: var(--letter-spacing-extra);
+}
+
+.magazine-section__title-link {
+  display: flex;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.magazine-section__title-link__arrow{
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  display: none;
+}
+
+/* 호버 상태도 동일하게 유지 - 전역 a:hover 스타일 무력화 */
+.magazine-section__title-link:hover {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ===== 캐러셀 컨테이너 ===== */
+.magazine-carousel3d__container {
+  position: relative;
+  width: 100%;
+  min-height: var(--magazine-carousel3d-container-min-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== 3D 캐러셀 컨테이너 ===== */
+.magazine-carousel3d {
+  outline: none;
+  position: relative;
+  width: var(--magazine-carousel3d-size);
+  height: auto;
+  perspective: var(--magazine-carousel3d-perspective);
+}
+
+/* ===== 3D 회전 무대 ===== */
+.magazine-carousel3d__stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: translateZ(var(--magazine-carousel3d-translate-z)) rotateY(0deg);
+  transition: var(--magazine-carousel3d-transition);
+  /* GPU 가속 */
+  will-change: transform;
+}
+
+/* ===== 캐러셀 셀 ===== */
+.magazine-carousel3d__cell {
+  position: absolute;
+  width: var(--magazine-carousel3d-size);
+  height: fit-content;
+  transform: translateY(-50%);
+  display: flex;
+  gap: var(--space-2);
+  flex-direction: column;
+  /* GPU 가속 */
+  will-change: transform;
+  transform: translate3d(0, -50%, 0);
+}
+
+
+/* ===== 이미지 영역 ===== */
+.magazine-carousel3d__image-area {
+  display: flex;
+  height: var(--magazine-carousel3d-size);
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.magazine-carousel3d__cell--center .magazine-carousel3d__image-area {
+  /* 중앙 셀 전용 스타일 */
+}
+
+.magazine-carousel3d__cell--no-image .magazine-carousel3d__image-area::before {
+  content: 'Vinscent';
+  color: var(--color-white);
+  background-color: var(--color-black);
+  font-size: var(--magazine-carousel3d-placeholder-font-size);
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family-logo);
+}
+
+.magazine-carousel3d__cell--center:hover .magazine-carousel3d__image-area {
+  height: calc(var(--magazine-carousel3d-size) * 4 / 3);
+  transition: height 0.3s ease;
+  z-index: 5 !important;
+}
+
+/* ===== 매거진 정보 표시 (셀 내부) - 🎨 트랜지션 추가 ===== */
+.magazine-carousel3d__info {
+  min-height: var(--magazine-carousel3d-info-min-height);
+  height: fit-content;
+  text-align: center;
+  /* 🎨 NEW: 부드러운 트랜지션 (캐러셀 회전과 동일한 속도) */
+  transition: opacity var(--transition-carousel) linear, visibility var(--transition-carousel) linear;
+  opacity: 1;
+  visibility: visible;
+  /* transform: translateY(0); - 삭제됨! */
+  pointer-events: auto;
+}
+
+.magazine-carousel3d__info--hidden {
+  /* 🎨 순수 fade out - 위아래 이동 완전 제거! */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  /* transform: translateY(10px); - 삭제됨! */
+}
+
+.magazine-carousel3d__info-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.magazine-carousel3d__info-brand {
+  font-size: var(--font-size-xs);
+  opacity: 0.9;
+}
+
+.magazine-carousel3d__info-brand--link {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  color: var(--color-primary);
+  opacity: 1;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition-colors);
+  text-align: center;
+}
+
+.magazine-carousel3d__info-brand--link:hover {
+  color: var(--color-primary-hover);
+  opacity: 1;
+}
+
+/* ===== 네비게이션 버튼 ===== */
+.magazine-carousel3d__nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--magazine-carousel3d-nav-gap);
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--magazine-carousel3d-nav-font-size);
+  pointer-events: none;
+}
+
+.magazine-carousel3d__nav-button {
+  padding: var(--magazine-carousel3d-button-padding-y) var(--magazine-carousel3d-button-padding-x);
+  font-size: inherit;
+  font-family: inherit;
+  text-transform: uppercase;
+  background: var(--color-white-trans);
+  color: var(--color-white);
+  border-radius: var(--magazine-carousel3d-button-radius);
+  border: none;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* ===== 모바일 반응형 (768px 미만) ===== */
+@media (max-width: 767px) {
+  /* 섹션 타이틀 모바일 최적화 */
+  .magazine-section__title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-4);
+  }
+
+  /* 컨테이너를 모바일 피드 형식으로 변경 */
+  .magazine-carousel3d__container {
+    min-height: auto;
+    align-items: flex-start;
+    padding: 0 var(--space-4);
+  }
+
+  /* 3D 캐러셀을 일반 컨테이너로 변경 */
+  .magazine-carousel3d {
+    width: 100%;
+    perspective: none;
+    max-width: 100%;
+  }
+
+  /* 3D 무대를 세로 리스트 컨테이너로 변경 */
+  .magazine-carousel3d__stage {
+    position: static;
+    transform-style: flat;
+    transform: none;
+    transition: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    will-change: auto;
+    height: auto;
+  }
+
+  /* 셀을 일반 카드로 변경 */
+  .magazine-carousel3d__cell {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: none;
+    will-change: auto;
+    margin-bottom: 0;
+  }
+
+  /* 빈 셀 숨김 (모바일에서는 실제 데이터만 표시) */
+  .magazine-carousel3d__cell--empty {
+    display: none;
+  }
+
+  /* 이미지 영역을 모바일 카드 형식으로 조정 */
+  .magazine-carousel3d__image-area {
+    width: calc(100vw - 20px); /* 화면 너비에서 좌우 10px씩 마진 */
+    height: calc((100vw - 20px) * 1.414); /* 1:1.414 비율 (√2) */
+    min-height: calc((100vw - 20px) * 1.414); /* 배경 이미지 표시를 위한 최소 높이 보장 */
+    border-radius: 0; /* 모서리 둥글지 않게 */
+    margin-bottom: var(--space-3);
+  }
+
+  /* 호버 효과 제거 (터치 디바이스) */
+  .magazine-carousel3d__cell--center:hover {
+    height: auto !important;
+    z-index: auto !important;
+  }
+
+  /* 🎨 모바일에서는 매거진 정보를 항상 표시 (트랜지션 없음) */
+  .magazine-carousel3d__info {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+    text-align: left;
+    padding: var(--space-3) 0;
+    min-height: auto;
+    /* 모바일에서는 트랜지션 제거 */
+    transition: none;
+  }
+
+  .magazine-carousel3d__info--hidden {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+    /* 모바일에서는 트랜지션 제거 */
+    transition: none;
+  }
+
+  .magazine-carousel3d__info-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-1);
+    color: var(--text-primary);
+  }
+
+  .magazine-carousel3d__info-brand {
+    font-size: var(--font-size-sm);
+    opacity: 0.7;
+    color: var(--text-secondary);
+  }
+
+  /* 모바일에서의 브랜드 링크 */
+  .magazine-carousel3d__info-brand--link {
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+    opacity: 1;
+    text-align: left;
+  }
+
+  .magazine-carousel3d__info-brand--link:hover {
+    color: var(--color-primary-hover);
+  }
+
+  /* 네비게이션 버튼 숨김 (모바일에서는 불필요) */
+  .magazine-carousel3d__nav {
+    display: none;
+  }
+
+  /* 터치 최적화: 클릭 영역 확대 */
+  .magazine-carousel3d__image-area {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* 모바일에서 스크롤 성능 최적화 */
+  .magazine-carousel3d__stage {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+}

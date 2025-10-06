@@ -1,0 +1,24 @@
+# 배포 시 제외할 파일/폴더
+
+# 개발 도구
+scripts/
+
+# 실행 파일
+*.exe
+
+# 테스트 관련
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+__tests__/
+
+# 스토리북
+.storybook/
+*.stories.tsx
+*.stories.ts
+
+# 기타
+.vscode/
+.idea/
+*.log

@@ -1,0 +1,901 @@
+/* Card 컴포넌트 스타일*/
+
+/* ===== Base Card ===== */
+.card {
+  /* 구조 */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  
+  /* 시각 */
+  background-color: var(--bg-surface);
+  overflow: hidden;
+  
+  /* 기본값 */
+  padding: var(--card-padding-md);
+  gap: var(--card-gap-md);
+  
+  /* 인터랙션 */
+  transition: var(--transition-all);
+}
+
+/* ===== Elements ===== */
+
+/* Card Header */
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+/* Card Title */
+.card__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+  line-height: var(--line-height-tight);
+}
+
+/* Card Subtitle */
+.card__subtitle {
+  font-size: var(--font-size-base-responsive); /* 🚀 하이브리드: 모바일 14px → 데스크톱 18px */
+  color: var(--text-secondary);
+  margin: var(--space-1) 0 0 0;
+  line-height: var(--line-height-body); /* 🔧 한국어 최적화 행간 적용 */
+}
+
+/* Card Media */
+.card__media {
+  position: relative;
+  margin: calc(var(--card-padding-md) * -1);
+  margin-bottom: 0;
+  overflow: hidden;
+  background-color: var(--bg-surface-hover);
+}
+
+.card__media--bottom {
+  margin: 0 calc(var(--card-padding-md) * -1) calc(var(--card-padding-md) * -1) calc(var(--card-padding-md) * -1);
+}
+
+.card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Card Content */
+.card__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+/* Card Actions */
+.card__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: auto;
+}
+
+.card__actions--end {
+  justify-content: flex-end;
+}
+
+/* Card Badge */
+.card__badge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-on-primary);
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+/* Card Overlay */
+.card__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: var(--transition-all);
+}
+
+/* ===== Size Variants ===== */
+.card--size-sm {
+  padding: var(--card-padding-sm);
+  gap: var(--card-gap-sm);
+}
+
+.card--size-sm .card__title {
+  font-size: var(--font-size-lg);
+}
+
+.card--size-sm .card__media {
+  margin: calc(var(--card-padding-sm) * -1);
+  margin-bottom: 0;
+}
+
+.card--size-lg {
+  padding: var(--card-padding-lg);
+  gap: var(--card-gap-lg);
+}
+
+.card--size-lg .card__title {
+  font-size: var(--font-size-2xl);
+}
+
+.card--size-lg .card__media {
+  margin: calc(var(--card-padding-lg) * -1);
+  margin-bottom: 0;
+}
+
+/* ===== Style Variants ===== */
+
+/* Elevated */
+.card--variant-elevated {
+  border: none;
+  box-shadow: var(--card-shadow);
+}
+
+.card--variant-elevated:hover {
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* Outlined */
+.card--variant-outlined {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* Filled */
+.card--variant-filled {
+  background-color: var(--bg-surface-hover);
+  border-color: transparent;
+}
+
+/* ===== Special Modifiers ===== */
+
+/* Horizontal Card */
+.card--horizontal {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card--horizontal .card__media {
+  width: 40%;
+  margin: calc(var(--card-padding-md) * -1);
+  margin-right: 0;
+}
+
+.card--horizontal .card__content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap-md);
+}
+
+/* Clickable Card */
+.card--clickable {
+  cursor: pointer;
+}
+
+.card--clickable:hover {
+  transform: translateY(0px);
+  box-shadow: var(--shadow-md);
+  background-color: var(--color-card-hover);
+}
+
+.card--clickable:hover .card__overlay {
+  opacity: 0.1;
+}
+
+.card--clickable:active {
+  transform: translateY(0);
+}
+
+/* ===== States ===== */
+
+/* Selected */
+.card.is-selected {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+/* Loading */
+.card.is-loading {
+  pointer-events: none;
+}
+
+.card.is-loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bg-surface);
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== Card Grid ===== */
+.card-grid {
+  display: grid;
+  gap: var(--card-grid-gap-vertical, 9.71rem) var(--card-grid-gap-horizontal, 6rem);
+  grid-template-columns: repeat(var(--card-columns, 3), 1fr);
+  align-items: start;
+  justify-content: center;
+  width: 100%;
+}
+
+/* 카드 최대 너비 제한 */
+.card-grid > * {
+  max-width: var(--card-max-width, 315px);
+  min-width: var(--card-min-width, 240px);
+  width: 100%;
+  justify-self: center;
+}
+
+/* 대역폭 캐시 대비 - 반응형 fallback */
+@media (max-width: 767px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--space-8) var(--space-4); /* 모바일 간소화: 세로 16px, 가로 12px */
+    align-items: start; /* 카드 높이가 다를 때 상단 정렬 */
+  }
+  
+  /* 모바일에서 카드 최대 너비 제한 제거 */
+  .card-grid > * {
+    max-width: none;
+    min-width: auto;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 911px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (min-width: 912px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* ===== Product Card ===== */
+.card--product {
+  /* 제품 카드 전용 스타일 */
+}
+
+.card--product .card__price {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-top: var(--space-2);
+}
+
+.card--product .card__price-original {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-muted);
+  text-decoration: line-through;
+  margin-right: var(--space-2);
+}
+
+.card--product .card__discount {
+  color: var(--color-error);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ===== Magazine Card ===== */
+.card--magazine {
+  padding: var(--space-0);
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  position: relative;
+  overflow: visible; /* 내용 넘침 허용 */
+  gap: var(--space-3);
+}
+
+.card--magazine .card__category {
+  font-size: var(--font-size-base);  /* 🔧 14px → 16px 가독성 개선 */
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  margin-bottom: var(--space-1);
+}
+
+.card--magazine .card__author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-base);  /* 🔧 14px → 16px 가독성 개선 */
+  color: var(--text-secondary);
+  margin-top: var(--space-3);
+  line-height: var(--line-height-body); /* 🔧 한국어 최적화 행간 적용 */
+}
+
+.card--magazine .card__author-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-surface-hover);
+}
+
+/* ===== 매거진 카드 호버 가능 이미지 영역 ===== */
+.card--magazine .card__media--hoverable {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  transition: var(--transition-transform);
+  margin: var(--space-0);
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 4; /* 더 자연스러운 비율 */
+  flex: none; /* flex 자동 크기 조절 방지 */
+}
+
+.card--magazine .card__media--hoverable:active {
+  transform: scale(0.98);
+}
+
+.card--magazine .card__media--hoverable:focus {
+  outline: 2px solid var(--color-black);
+  outline-offset: 2px;
+}
+
+.card--magazine .card__content-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  height: auto;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-4);
+  align-items: stretch;
+  padding: var(--space-6);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: var(--color-white);
+  opacity: 0;
+  transition: var(--transition-slow);
+  z-index: var(--z-index-dropdown);
+  pointer-events: none; 
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.card--magazine .card__content-overlay * {
+  pointer-events: auto;
+}
+
+.card--magazine .card__overlay-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+  max-height: 100%;
+}
+
+.card--magazine .card__overlay-group--top {
+  align-self: flex-start;
+}
+
+.card--magazine .card__overlay-group--middle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-1);
+  max-height: 100%;
+}
+
+.card--magazine .card__overlay-group--bottom {
+  align-self: flex-start;
+  width: 100%;
+}
+
+.card--magazine .card__overlay-bottom-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.card--magazine .card__content-overlay .card__meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm-responsive); /* 🚀 하이브리드: 모바일 12px → 데스크톱 16px */
+  color: var(--color-white);
+  line-height: var(--line-height-body); /* 🔧 한국어 최적화 행간 적용 */
+}
+
+/* 브랜드 정보 */
+.card--magazine .card__content-overlay .card__brand {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-white);
+}
+
+/* 날짜 정보 */
+.card--magazine .card__content-overlay .card__date {
+  font-size: var(--font-size-xs);
+  color: var(--color-white);
+  opacity: 0.9;
+  white-space: nowrap;
+}
+
+/* 제목 */
+.card--magazine .card__content-overlay .card__title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-white);
+  line-height: var(--line-height-tight);
+  margin: 0;
+  text-align: start;
+}
+
+.card--magazine .card__content-overlay .card__subtitle {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-secondary);
+  line-height: var(--line-height-normal);
+  margin: var(--space-0);
+  opacity: 0.9;
+  text-align: start;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.card--magazine .card__content-overlay .card__subtitle--truncate {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card--magazine .card__link {
+  color: var(--color-white);
+  border-color: var(--color-white);
+  border-radius: 0px;
+  border-bottom: 1px solid;
+}
+
+.card--magazine .card__link:hover:not(:disabled):not(.is-disabled) {
+  color: var(--color-white) !important;
+  border-color: var(--color-white);
+}
+
+.card--magazine .card__link:focus {
+  color: var(--color-white) !important;
+  border-color: var(--color-white);
+  outline-offset: 1px !important;
+}
+
+.card--magazine .card__link-base {
+  color: var(--color-black);
+  border-color: var(--color-white);
+}
+
+.card--magazine .card__link-base:hover:not(:disabled):not(.is-disabled) {
+  color: var(--color-black) !important;
+  border-color: var(--color-white);
+}
+
+.card--magazine .card__link-base:focus {
+  color: var(--color-black) !important;
+  border-color: var(--color-white);
+}
+
+/* ===== 데스크톱에서만 호버 효과 활성화 ===== */
+@media (min-width: 768px) and (hover: hover) {
+  .card--magazine .card__media--hoverable:hover .card__content-overlay,
+  .card--magazine .card__media--hoverable:focus .card__content-overlay {
+    opacity: 1;
+  }
+}
+
+/* ===== 모바일/태블릿용 기존 콘텐츠 영역 ===== */
+.card--magazine .card__content-static {
+  padding: var(--space-3);
+  pointer-events: none;
+}
+
+.card--magazine .card__content-static * {
+  pointer-events: auto;
+}
+
+/* 데스크톱에서는 오버레이만 표시 */
+@media (min-width: 768px) {
+  .card--magazine .card__content-static--mobile-only {
+    display: none;
+  }
+}
+
+/* 모바일/태블릿에서는 기존 레이아웃 유지 */
+@media (max-width: 767px) {
+  .card--magazine .card__content-overlay {
+    display: none !important;
+  }
+  
+  .card--magazine .card__content-static--mobile-only {
+    display: block !important;
+    padding: 0 !important;
+  }
+  
+  .card--magazine .card__media--hoverable {
+    aspect-ratio: 1 / 1 !important; 
+  }
+  
+  .card--magazine .card__content-static .card__meta {
+    display: none !important; /* 브랜드명, 날짜 숨김 */
+  }
+  
+  .card--magazine .card__content-static .card__subtitle {
+    display: none !important; /* 부제목 숨김 */
+  }
+  
+  .card--magazine .card__content-static .card__title {
+    font-size: var(--font-size-sm) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    line-height: var(--line-height-tight) !important;
+    margin: 0 !important; 
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  
+  .card--magazine .card__views {
+    display: none !important;
+  }
+}
+
+/* ===== 기존 콘텐츠 영역 스타일 (모바일/태블릿) ===== */
+.card--magazine .card__content-static .card__meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-sm-responsive); /* 🚀 하이브리드: 모바일 12px → 데스크톱 16px */
+  color: var(--text-muted);
+  line-height: var(--line-height-body); /* 🔧 한국어 최적화 행간 적용 */
+}
+
+.card--magazine .card__content-static .card__brand {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: var(--transition-colors);
+}
+
+.card--magazine .card__content-static .card__brand:hover {
+  color: var(--color-primary-hover);
+}
+
+/* 🔧 브랜드 링크 버튼 스타일 (오버레이 + 모바일) */
+.card__brand--link {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition-colors);
+  text-align: left;
+  line-height: inherit;
+}
+
+.card__brand--link:hover {
+  color: var(--color-primary-hover);
+}
+
+/* 오버레이에서의 브랜드 링크 */
+.card--magazine .card__content-overlay .card__brand--link {
+  color: var(--color-white);
+  font-weight: var(--font-weight-semibold);
+}
+
+.card--magazine .card__content-overlay .card__brand--link:hover {
+  color: var(--color-white);
+  opacity: 0.8;
+}
+
+.card--magazine .card__content-static .card__date {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.card--magazine .card__content-static .card__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  line-height: var(--line-height-tight);
+  margin: 0 0 var(--space-1) 0;
+  
+  /* 모바일에서 더 많은 텍스트 표시 가능 */
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 2줄 → 3줄로 확장 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card--magazine .card__content-static .card__subtitle {
+  font-size: var(--font-size-base);  /* 🔧 14px → 16px 가독성 개선 */
+  color: var(--text-secondary);
+  line-height: var(--line-height-body); /* 🔧 한국어 최적화 행간 적용 */
+  margin: 0 0 var(--space-3) 0;
+  
+  /* 모바일에서 더 많은 텍스트 표시 가능 */
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* 2줄 → 4줄로 확장 (부제목은 더 길게) */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 조회수 표시 */
+.card--magazine .card__views {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin-top: var(--space-2);
+}
+
+.card--magazine .card__views-icon {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.7;
+}
+
+/* 이미지 없음 표시 */
+.card--magazine .card__no-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  background-color: var(--bg-surface-hover);
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* 레이아웃 변형 */
+.card--magazine .card--vertical {
+  /* 기본 세로 레이아웃 */
+}
+
+.card--magazine .card--horizontal {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.card--magazine .card--horizontal .card__media {
+  flex: 0 0 40%;
+  align-self: stretch;
+  aspect-ratio: unset;
+}
+
+.card--magazine .card--horizontal .card__content-static {
+  flex: 1;
+  padding: var(--space-3);
+}
+
+/* 접근성 개선 */
+.card--magazine .card__media[role="button"] {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* 스켈레톤 로딩 상태 */
+.card--magazine .card.is-loading .card__media,
+.card--magazine .card.is-loading .card__title,
+.card--magazine .card.is-loading .card__subtitle,
+.card--magazine .card.is-loading .card__meta {
+  background: linear-gradient(90deg, 
+    var(--bg-surface-hover) 25%, 
+    var(--bg-surface) 50%, 
+    var(--bg-surface-hover) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: var(--breakpoint-mobile)) {
+  .card--horizontal {
+    flex-direction: column;
+  }
+  
+  .card--horizontal .card__media {
+    width: 100%;
+    margin: calc(var(--card-padding-md) * -1);
+    margin-bottom: 0;
+  }
+  
+  .card__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+}
+
+/* ===== 매거진 카드 모바일 최적화 ===== */
+/* 🎯 카드 전체: 3:4 비율, 이미지가 텍스트 제외한 모든 공간 차지 */
+@media (max-width: 767px) {
+  
+  /* 🏗️ 카드 전체 구조: 3:4 비율 고정, flex column 레이아웃 */
+  .card--magazine {
+    aspect-ratio: 3 / 4 !important;
+    display: flex;
+    flex-direction: column;
+    padding: 0; /* 패딩 제거 */
+    overflow: hidden;
+    position: relative;
+    contain: layout style paint; /* 성능 최적화 */
+  }
+  
+  /* 🖼️ 이미지 영역: 텍스트를 제외한 모든 공간 차지 */
+  .card--magazine .card__media--hoverable {
+    flex: 1; /* 남은 공간 모두 차지 */
+    aspect-ratio: unset !important; /* 기존 1:1 비율 제거 */
+    width: 100%;
+    height: auto; /* 자동 높이 */
+    margin: 0; /* 기존 마진 제거 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-surface-hover);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    -webkit-tap-highlight-color: transparent; /* 터치 하이라이트 제거 */
+  }
+  
+  .card--magazine .card__media--hoverable img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지 비율 유지하며 영역 채우기 */
+    display: block;
+    max-width: 100%;
+    vertical-align: top; /* 이미지 하단 여백 제거 */
+    transition: var(--transition-normal);
+  }
+
+  
+  .card--magazine .card__media--hoverable img:hover {
+    transform: scale(1.02);
+  }
+  
+  /* 📝 텍스트 영역: 내용만큼 높이 차지 (가변) */
+  .card--magazine .card__content-static--mobile-only {
+    display: block !important;
+    flex: none; /* 고정 크기 */
+    padding: 0 !important; /* 패딩 완전 제거 */
+    background-color: var(--bg-surface);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* 🏷️ 제목: 자연스러운 줄바꿈, 말줄임 없음 */
+  .card--magazine .card__content-static .card__title {
+    font-size: var(--font-size-sm) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    line-height: var(--line-height-tight) !important;
+    color: var(--text-primary);
+    margin: 0 !important;
+    
+    /* 말줄임 제거 - 자연스러운 줄바꿈 허용 */
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    -webkit-box-orient: unset !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    white-space: normal; /* 줄바꿈 허용 */
+    word-wrap: break-word; /* 긴 단어 자동 줄바꿈 */
+  }
+  
+  /* ❌ 불필요한 요소들 숨김 (미니멀 유지) */
+  .card--magazine .card__content-static .card__meta {
+    display: none !important;
+  }
+  
+  .card--magazine .card__content-static .card__subtitle {
+    display: none !important;
+  }
+  
+  .card--magazine .card__views {
+    display: none !important;
+  }
+  
+  /* 🚫 데스크톱 오버레이는 모바일에서 완전히 비활성화 */
+  .card--magazine .card__content-overlay {
+    display: none !important;
+  }
+  
+  /* 🖼️ 이미지 없음 상태 스타일링 */
+  .card--magazine .card__no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-surface-hover);
+    color: var(--text-muted);
+    font-size: var(--font-size-sm);
+    text-align: center;
+  }
+  
+  /* 🎨 터치 상호작용 최적화 */
+  .card--magazine .card__media--hoverable:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease-out;
+  }
+  
+  /* 포커스 상태 (접근성) */
+  .card--magazine .card__media--hoverable:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+  }
+  
+  /* 🔧 그리드 시스템과의 호환성 보장 */
+  .card-grid > .card--magazine {
+    width: 100%;
+    justify-self: center;
+    align-self: start; /* 상단 정렬 */
+  }
+  
+  /* 카드 간격 최적화 (기존 그리드 간격 유지) */
+  .card-grid {
+    align-items: start; /* 카드 높이가 다를 때 상단 정렬 */
+  }
+  
+  /* 🏗️ 레이아웃 변형 대응 */
+  .card--magazine.card--horizontal {
+    flex-direction: column;
+  }
+  
+  .card--magazine.card--horizontal .card__media {
+    flex: 1;
+  }
+  
+  .card--magazine.card--horizontal .card__content-static {
+    flex: none;
+    padding: var(--space-3);
+  }
+}

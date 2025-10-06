@@ -1,0 +1,52 @@
+/* 메인 CSS import */
+@import '../styles/main.css';
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/pretendardvariable.min.css');
+
+
+/* Next.js Layout Shift 방지 */
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Next.js Image 컴포넌트 기본 스타일 */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 개발 모드 인디케이터 스타일 */
+.development-indicator {
+  position: fixed;
+  bottom: var(--space-4);
+  right: var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--color-warning);
+  color: var(--text-on-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-full);
+  z-index: var(--z-index-tooltip);
+}
+
+/* 페이지 전환 애니메이션 */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: var(--transition-all);
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: var(--transition-all);
+}

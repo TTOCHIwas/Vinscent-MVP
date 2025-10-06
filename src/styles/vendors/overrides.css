@@ -1,0 +1,181 @@
+/*서드파티 라이브러리 오버라이드*/
+/* ===== Lucide React Icons ===== */
+.lucide {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+}
+
+/* ===== React Hook Form ===== */
+.rhf-error-message {
+  color: var(--color-error) !important;
+  font-size: var(--font-size-sm) !important;
+  margin-top: var(--space-1) !important;
+}
+
+/* ===== TanStack Query DevTools ===== */
+.tsqd-parent-container {
+  font-family: var(--font-family-base) !important;
+}
+
+.tsqd-button {
+  background-color: var(--color-primary) !important;
+  color: var(--text-on-primary) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+/* ===== Cloudinary Upload Widget ===== */
+.cloudinary-button {
+  background-color: var(--color-primary) !important;
+  color: var(--text-on-primary) !important;
+  border: none !important;
+  border-radius: var(--button-border-radius) !important;
+  padding: var(--space-2) var(--space-4) !important;
+  font-family: var(--font-family-base) !important;
+  font-size: var(--font-size-base) !important;
+  font-weight: var(--font-weight-medium) !important;
+  cursor: pointer !important;
+  transition: var(--transition-all) !important;
+}
+
+.cloudinary-button:hover {
+  background-color: var(--color-primary-hover) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ===== NextJS Specific ===== */
+
+/* Next Image */
+.next-image-wrapper {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+/* Next Link - 포커스 스타일 */
+a:focus-visible {
+  outline: 2px solid var(--border-focus) !important;
+  outline-offset: 2px !important;
+}
+
+/* ===== 스크롤바 커스터마이징 ===== */
+/* Webkit 브라우저 (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: var(--radius-md);
+  border: 3px solid var(--bg-surface);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-heavy);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-medium) var(--bg-surface);
+}
+
+/* ===== 프린트 스타일 ===== */
+@media print {
+  /* 불필요한 요소 숨기기 */
+  .header,
+  .footer,
+  .sidebar,
+  .modal,
+  .toast,
+  .no-print {
+    display: none !important;
+  }
+  
+  /* 페이지 설정 */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  /* 링크 URL 표시 */
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  
+  /* 페이지 나누기 */
+  .page-break {
+    page-break-after: always;
+  }
+  
+  .avoid-break {
+    page-break-inside: avoid;
+  }
+}
+
+/* ===== 접근성 개선 ===== */
+
+/* 고대비 모드 */
+@media (prefers-contrast: high) {
+  * {
+    border-width: 2px !important;
+  }
+  
+  .button,
+  .input,
+  .card {
+    border: 2px solid currentColor !important;
+  }
+}
+
+/* 모션 감소 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===== 개발 환경 전용 스타일 ===== */
+.dev-only {
+  outline: 2px dashed red !important;
+  outline-offset: 2px !important;
+}
+
+.dev-grid-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(255, 0, 0, 0.1) 0px,
+    transparent 1px,
+    transparent var(--space-8),
+    rgba(255, 0, 0, 0.1) var(--space-8)
+  );
+}
+
+/* ===== 임시 수정사항 (TODO: 제거 예정) ===== */
+/* 
+ * 이 섹션은 긴급 수정사항을 위한 것입니다.
+ * 가능한 빨리 적절한 컴포넌트 파일로 이동시켜주세요.
+ */
+
+/* 예시: 특정 페이지의 임시 수정 */
+/* .specific-page-fix {
+  margin-top: var(--space-4) !important;
+} */

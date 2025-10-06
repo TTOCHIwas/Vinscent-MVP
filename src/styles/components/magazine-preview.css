@@ -1,0 +1,162 @@
+/**
+ * 매거진 미리보기 페이지 스타일
+ * 
+ * 🔧 블록 에디터 순서 보존 + 마크다운 렌더링
+ * magazine-detail.css 기반 + 블록별 렌더링 지원
+ */
+
+/* 🔧 미리보기 전용 상단 네비게이션 */
+.magazine-preview__navigation {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-sticky);
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-4);
+}
+
+.magazine-preview__nav-container {
+  max-width: var(--magazine-detail-max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  gap: var(--space-3);
+}
+
+.magazine-preview__nav-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+  text-align: center;
+  flex: 1;
+}
+
+.magazine-preview__nav-button {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  transition: var(--transition-colors), var(--transition-shadow);
+  white-space: nowrap;
+}
+
+.magazine-preview__nav-button:hover:not(:disabled) {
+  background-color: var(--bg-surface-hover);
+  border-color: var(--border-heavy);
+  box-shadow: var(--shadow-sm);
+}
+
+.magazine-preview__nav-button--save {
+  background-color: var(--color-primary);
+  color: var(--text-on-primary);
+  border-color: var(--color-primary);
+}
+
+.magazine-preview__nav-button--save:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.magazine-preview__nav-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--bg-input);
+  color: var(--text-muted);
+  border-color: var(--border-light);
+}
+
+/* 반응형 네비게이션 */
+@media (max-width: 768px) {
+  .magazine-preview__nav-container {
+    padding: var(--space-2) var(--space-3);
+    gap: var(--space-2);
+  }
+  
+  .magazine-preview__nav-title {
+    font-size: var(--font-size-base);
+  }
+  
+  .magazine-preview__nav-button {
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* 🔧 블록 에디터 전용 마크다운 스타일 */
+.magazine-detail__section-content h1 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin: var(--space-4) 0 var(--space-3) 0;
+  line-height: var(--line-height-tight);
+}
+
+.magazine-detail__section-content h2 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: var(--space-3) 0 var(--space-2) 0;
+  line-height: var(--line-height-tight);
+}
+
+.magazine-detail__section-content h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: var(--space-3) 0 var(--space-2) 0;
+  line-height: var(--line-height-tight);
+}
+
+.magazine-detail__section-content strong {
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.magazine-detail__section-content em {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.magazine-detail__section-content a {
+  color: var(--color-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-primary);
+  transition: var(--transition-colors);
+}
+
+.magazine-detail__section-content a:hover {
+  color: var(--color-primary-hover);
+  border-bottom-color: var(--color-primary-hover);
+}
+
+.magazine-detail__section-content p {
+  margin-bottom: var(--space-3);
+  line-height: var(--line-height-relaxed);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+}
+
+.magazine-detail__section-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* 
+🔧 magazine-detail.css의 기본 스타일들이 자동 적용:
+- .magazine-detail 컨테이너
+- .magazine-detail__header 
+- .magazine-detail__content
+- .magazine-detail__image-figure
+- .magazine-detail__image-source
+- 모든 기본 매거진 스타일들
+*/

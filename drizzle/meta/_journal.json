@@ -1,0 +1,62 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1751264640572,
+      "tag": "0000_lumpy_newton_destine",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1753496060773,
+      "tag": "0001_zippy_rhodey",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1753496513667,
+      "tag": "0002_stiff_ronan",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1756300229934,
+      "tag": "0003_naive_steve_rogers",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1756300486345,
+      "tag": "0004_classy_giant_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1757225860919,
+      "tag": "0005_pink_next_avengers",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1758457385420,
+      "tag": "0006_colorful_earthquake",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1759652307502,
+      "tag": "0007_watery_newton_destine",
+      "breakpoints": true
+    }
+  ]
+}

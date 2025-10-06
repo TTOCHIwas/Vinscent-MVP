@@ -1,0 +1,383 @@
+/**
+ * @component Pagination
+ * @description 접근성을 고려한 완전한 페이지네이션 컴포넌트 스타일
+ * 
+ * 설계 원칙:
+ * 1. 기존 토큰 시스템 활용으로 일관성 유지
+ * 2. BEM 방법론으로 명확한 구조 표현
+ * 3. 접근성 우선 설계 (WCAG 2.1 AA 준수)
+ * 4. 반응형 디자인으로 모든 기기 지원
+ * 5. 성능 최적화된 애니메이션
+ * 
+ * 사용처: 매거진 리스트, 제품 목록, 검색 결과 등
+ * 의존성: Button 컴포넌트, 토큰 시스템
+ */
+
+/* ===== Base Pagination Container ===== */
+.pagination {
+  /* 구조 설계: 
+   * 페이지네이션은 독립적인 네비게이션 영역이므로 
+   * 충분한 여백과 명확한 구조가 필요합니다 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6); /* 컨트롤과 정보 사이의 여백 */
+  width: 100%;
+  margin: var(--space-8) 0; /* 위아래 충분한 여백으로 시각적 분리 */
+  
+  /* 접근성: 스크린 리더가 페이지네이션 영역임을 명확히 인식 */
+  outline: none;
+}
+
+/* ===== Pagination Controls (Button Group) ===== */
+.pagination__controls {
+  /* 버튼들의 그룹 레이아웃:
+   * 버튼들이 시각적으로 하나의 단위로 인식되도록 설계 */
+  display: flex;
+  align-items: center;
+  
+  gap: var(--space-1); /* 버튼 간 최소 간격으로 밀집도 높임 */
+  
+  /* 반응형 고려: 작은 화면에서도 버튼들이 겹치지 않도록 */
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  
+  /* 스크롤바 숨김 (모바일에서 깔끔한 UX) */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.pagination__controls::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== Pagination Button Base ===== */
+.pagination__button {
+  /* 기본 Button 컴포넌트를 확장하여 Pagination에 특화된 스타일 추가
+   * 이렇게 하면 Button의 모든 기능(호버, 포커스 등)을 그대로 상속받으면서
+   * Pagination만의 특별한 요구사항을 추가할 수 있습니다 */
+  
+  /* 일관된 크기: 페이지 번호든 화살표든 동일한 크기 */
+  min-width: var(--space-10); /* 40px - 터치 친화적 최소 크기 */
+  min-height: var(--space-10);
+  
+  /* 텍스트 정렬: 페이지 번호가 중앙에 오도록 */
+  justify-content: center;
+  text-align: center;
+  
+  /* 애니메이션 최적화: 부드러운 상호작용 */
+  transition: var(--transition-all);
+  
+  /* 모바일 최적화: 터치 대상 크기 확보 */
+  @media (max-width: 768px) {
+    min-width: var(--space-12); /* 48px - 모바일 권장 터치 크기 */
+    min-height: var(--space-12);
+  }
+}
+
+/* ===== Button Type Variants ===== */
+
+/* 현재 페이지 버튼: 매거진 필터와 동일한 하단 보더 스타일 */
+.pagination__button--active {
+  /* 배경색 제거 - 투명한 배경 */
+  background-color: transparent !important;
+  color: var(--text-primary) !important;
+  border-color: transparent !important;
+  
+  /* 매거진 필터와 동일한 하단 보더 */
+  position: relative;
+  border-radius: 0px !important;
+  border-bottom: 2px solid var(--color-black) !important;
+  
+  /* 접근성: 폰트 강조로 현재 페이지임을 표시 */
+  font-weight: var(--font-weight-semibold);
+  
+  /* 호버 시에도 동일한 스타일 유지 */
+  &:hover:not(:disabled) {
+    background-color: transparent !important;
+    color: var(--text-primary) !important;
+    border-bottom-color: var(--color-black) !important;
+  }
+}
+
+/* 페이지 번호 버튼 */
+.pagination__button--page {
+  /* 기본 ghost variant 활용으로 시각적 위계 생성 */
+  /* 숫자만 표시되므로 아이콘 스타일링 불필요 */
+}
+
+/* 네비게이션 버튼들 (이전, 다음, 처음, 마지막) */
+.pagination__button--previous,
+.pagination__button--next,
+.pagination__button--first,
+.pagination__button--last {
+  /* 아이콘 버튼 스타일링: 
+   * 시각적으로 방향성을 명확히 표현 */
+  
+  /* 아이콘과 텍스트 중앙 정렬 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* 아이콘 크기 조정 */
+  svg {
+    width: 1.25em;
+    height: 1.25em;
+    flex-shrink: 0;
+  }
+}
+
+/* 비활성화된 네비게이션 버튼 */
+.pagination__button--previous:disabled,
+.pagination__button--next:disabled,
+.pagination__button--first:disabled,
+.pagination__button--last:disabled {
+  /* 기본 Button의 disabled 스타일을 더욱 명확하게 */
+  opacity: 0.3; /* 더 낮은 투명도로 비활성 상태 강조 */
+  cursor: not-allowed;
+  
+  /* 호버 애니메이션 완전 비활성화 */
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ===== Ellipsis (생략 표시) ===== */
+.pagination__ellipsis {
+  /* 생략 표시는 버튼이 아닌 정적 요소:
+   * 클릭할 수 없음을 시각적으로 명확히 표현 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* 버튼과 동일한 크기로 시각적 일관성 유지 */
+  min-width: var(--space-10);
+  min-height: var(--space-10);
+  
+  /* 정적 요소임을 나타내는 스타일 */
+  color: var(--text-muted);
+  background-color: transparent;
+  border: none;
+  cursor: default;
+  
+  /* 아이콘 크기 */
+  svg {
+    width: 1.25em;
+    height: 1.25em;
+    opacity: 0.6; /* 더 흐릿하게 표시 */
+  }
+  
+  /* 호버 효과 없음 - 클릭할 수 없는 요소임을 명확히 */
+  &:hover {
+    background-color: transparent;
+    transform: none;
+  }
+}
+
+/* ===== Pagination Info ===== */
+.pagination__info {
+  /* 페이지 정보 표시 영역:
+   * 현재 위치를 텍스트로 명확히 안내 */
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  
+  /* 시각적 위계: 버튼보다 덜 강조되지만 읽기 쉽게 */
+  font-size: var(--font-size-sm-responsive); /* 🚀 하이브리드: 모바일 12px → 데스크톱 16px */
+  color: var(--text-secondary);
+  white-space: nowrap; /* 줄바꿈 방지 */
+  line-height: var(--line-height-body); /* 🔧 한국어 최적화 행간 적용 */
+  
+  /* 접근성: 스크린 리더가 페이지 정보임을 인식 */
+  user-select: none;
+}
+
+.pagination__info-text {
+  /* 실제 정보 텍스트 스타일링 */
+  font-weight: var(--font-weight-medium);
+  
+  /* 숫자 구분을 위한 스타일 */
+  font-variant-numeric: tabular-nums; /* 숫자 폭 일정하게 */
+}
+
+/* ===== Size Variants ===== */
+
+/* Small Size - 모바일이나 공간이 제한적인 곳에서 사용 */
+.pagination--size-sm {
+  gap: var(--space-4); /* 더 작은 간격 */
+  margin: var(--space-6) 0; /* 더 작은 여백 */
+  
+  .pagination__controls {
+    gap: var(--space-0-5); /* 버튼 간격 최소화 */
+  }
+  
+  .pagination__button {
+    min-width: var(--space-8); /* 32px */
+    min-height: var(--space-8);
+    font-size: var(--font-size-base);  /* 🔧 작은 사이즈에서도 14px → 16px 가독성 우선 */
+  }
+  
+  .pagination__info {
+    font-size: var(--font-size-sm);  /* 🔧 작은 사이즈에서도 12px → 14px 가독성 개선 */
+    line-height: var(--line-height-body); /* 🔧 한국어 최적화 행간 적용 */
+  }
+}
+
+/* Large Size - 데스크톱이나 여유가 있는 공간에서 사용 */
+.pagination--size-lg {
+  gap: var(--space-8); /* 더 큰 간격 */
+  margin: var(--space-12) 0; /* 더 큰 여백 */
+  
+  .pagination__controls {
+    gap: var(--space-2); /* 더 큰 버튼 간격 */
+  }
+  
+  .pagination__button {
+    min-width: var(--space-12); /* 48px */
+    min-height: var(--space-12);
+    font-size: var(--font-size-lg);
+  }
+  
+  .pagination__info {
+    font-size: var(--font-size-base);
+  }
+}
+
+/* ===== Loading State ===== */
+.pagination--loading {
+  /* 로딩 중에는 사용자 상호작용 차단 */
+  pointer-events: none;
+  
+  .pagination__button {
+    /* 전체적으로 흐리게 표시 */
+    opacity: 0.6;
+    cursor: wait;
+    
+    /* 애니메이션 비활성화 */
+    transition: none;
+  }
+  
+  .pagination__info {
+    opacity: 0.6;
+  }
+}
+
+/* ===== Responsive Design ===== */
+
+/* 태블릿: 중간 크기 화면 최적화 */
+@media (max-width: 768px) {
+  .pagination {
+    /* 모바일에서는 세로 공간 절약 */
+    margin: var(--space-6) 0;
+    gap: var(--space-4);
+    
+    /* 필요시 세로 배치로 전환 */
+    flex-direction: column;
+  }
+  
+  .pagination__controls {
+    /* 모바일에서 가로 스크롤 허용 */
+    justify-content: center;
+    overflow-x: auto;
+    width: 100%;
+    padding: 0 var(--space-4);
+  }
+  
+  .pagination__info {
+    /* 모바일에서 정보 섹션 크기 조정 */
+    font-size: var(--font-size-sm);  /* 🔧 모바일에서도 12px → 14px로 개선 */
+    order: -1; /* 정보를 위쪽으로 이동 */
+    line-height: var(--line-height-body); /* 🔧 한국어 최적화 행간 적용 */
+  }
+}
+
+/* 모바일: 작은 화면 최적화 */
+@media (max-width: 480px) {
+  .pagination {
+    /* 매우 작은 화면에서는 최소 여백 */
+    margin: var(--space-4) 0;
+    gap: var(--space-3);
+  }
+  
+  .pagination__controls {
+    gap: var(--space-0-5);
+  }
+  
+  .pagination__button {
+    /* 터치 친화적 최소 크기 유지하면서 공간 절약 */
+    min-width: var(--space-10);
+    min-height: var(--space-10);
+    font-size: var(--font-size-base);  /* 🔧 작은 모바일에서도 14px → 16px 가독성 우선 */
+  }
+  
+  /* 생략 표시와 첫/마지막 버튼은 숨김 (공간 절약) */
+  .pagination__ellipsis,
+  .pagination__button--first,
+  .pagination__button--last {
+    display: none;
+  }
+}
+
+/* ===== Accessibility Enhancements ===== */
+
+/* 고대비 모드 지원 */
+@media (prefers-contrast: high) {
+  .pagination__button {
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--border-medium);
+  }
+  
+  .pagination__button--active {
+    border-color: var(--color-primary);
+    border-width: 3px; /* 현재 페이지 더 강조 */
+  }
+}
+
+/* 움직임 감소 선호 사용자 지원 */
+@media (prefers-reduced-motion: reduce) {
+  .pagination__button {
+    transition: none; /* 애니메이션 완전 비활성화 */
+  }
+  
+  .pagination__button:hover:not(:disabled) {
+    transform: none; /* 호버 움직임 제거 */
+  }
+}
+
+/* 포커스 가시성 향상 */
+.pagination__button:focus-visible {
+  /* 기본 Button 포커스 스타일을 Pagination에 맞게 조정 */
+  outline: 3px solid var(--color-primary-light);
+  outline-offset: 2px;
+  z-index: 1; /* 다른 버튼들 위에 표시 */
+}
+
+/* ===== Print Styles ===== */
+@media print {
+  .pagination {
+    /* 인쇄 시에는 페이지네이션 숨김 */
+    display: none;
+  }
+}
+
+/* ===== Pagination Info Component (독립 사용 가능) ===== */
+.pagination-info {
+  /* 간단한 페이지 정보만 표시하는 컴포넌트
+   * 모바일이나 공간이 매우 제한적일 때 사용 */
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  
+  /* 스타일링 */
+  font-size: var(--font-size-base);  /* 🔧 독립 컴포넌트도 14px → 16px 가독성 개선 */
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-body); /* 🔧 한국어 최적화 행간 적용 */
+  
+  /* 숫자 일관성 */
+  font-variant-numeric: tabular-nums;
+  
+  /* 접근성 */
+  user-select: none;
+}

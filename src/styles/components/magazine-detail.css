@@ -1,0 +1,694 @@
+/**
+ * @component Magazine Detail Page
+ * @description 매거진 상세 페이지의 완전한 스타일링
+ * 
+ * 설계 원칙:
+ * 1. 기존 토큰 시스템과 완벽한 호환성
+ * 2. 읽기 경험 최적화 (65ch 최대 너비, 1.6 행간)
+ * 3. 이미지 중심의 매거진 레이아웃
+ * 4. 모바일 우선 반응형 디자인
+ * 5. Elle Korea 스타일 타이포그래피 계층
+ * 
+ * 사용처: /magazine/[id] 페이지
+ * 의존성: 기존 토큰 시스템, BEM 네이밍 규칙
+ */
+
+/* ===== 메인 컨테이너 ===== */
+.magazine-detail {
+  min-height: calc(100vh - var(--header-height));
+  background-color: var(--bg-page);
+}
+
+.magazine-detail__container {
+  max-width: var(--magazine-detail-max-width); /* 🎯 데스크톱 800px 고정 */
+  margin: 0 auto;
+  padding: clamp(var(--space-6), 8vh, var(--space-12)) clamp(var(--space-4), 4vw, var(--space-8));
+}
+
+/* ===== 헤더 영역 ===== */
+.magazine-detail__header {
+  text-align: left; /* Elle Korea 스타일 - 왼쪽 정렬 */
+  margin-bottom: clamp(var(--space-8), 8vh, var(--space-16));
+  width: 100%; /* 🎯 800px 컨테이너 전체 사용 */
+}
+
+/* 카테고리 배지 */
+.magazine-detail__category {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: #FF6B6B; /* Elle 스타일 빨간색 악센트 */
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  margin-bottom: var(--space-4);
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid currentColor;
+  border-radius: var(--radius-xs);
+}
+
+/* 메인 제목 */
+.magazine-detail__title {
+  font-size: clamp(var(--font-size-2xl), 6vw, var(--font-size-4xl)); /* 24px → 48px */
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight); /* 1.25 */
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4) 0;
+  
+  /* 한글 최적화 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 부제목 */
+.magazine-detail__subtitle {
+  font-size: clamp(var(--font-size-lg), 3vw, var(--font-size-xl)); /* 18px → 20px */
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-cjk); /* 1.6 - 한글 최적화 */
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-6) 0;
+  
+  /* 한글 최적화 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 메타 정보 */
+.magazine-detail__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+.magazine-detail__author,
+.magazine-detail__date,
+.magazine-detail__views {
+  display: flex;
+  align-items: center;
+}
+
+.magazine-detail__author {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+/* 🔧 브랜드 링크 스타일 */
+.magazine-detail__author-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: var(--transition-colors);
+  position: relative;
+}
+
+.magazine-detail__author-link:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+.magazine-detail__author-link:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+
+/* 외부 링크 아이콘 표시 (선택사항) */
+.magazine-detail__author-link:after {
+  content: '↗';
+  font-size: var(--font-size-xs);
+  margin-left: var(--space-1);
+  opacity: 0.6;
+  transition: var(--transition-colors);
+}
+
+.magazine-detail__author-link:hover:after {
+  opacity: 1;
+}
+
+.magazine-detail__date::before,
+.magazine-detail__views::before {
+  content: '•';
+  margin-right: var(--space-2);
+  color: var(--text-muted);
+}
+
+/* 모바일에서 메타 정보 세로 배치 */
+@media (max-width: 480px) {
+  .magazine-detail__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+  
+  .magazine-detail__date::before,
+  .magazine-detail__views::before {
+    display: none;
+  }
+}
+
+/* ===== 메인 콘텐츠 영역 ===== */
+.magazine-detail__content {
+  margin-bottom: clamp(var(--space-12), 10vh, var(--space-20));
+}
+
+/* 메인 콘텐츠 텍스트 */
+.magazine-detail__main-content {
+  width: 100%; /* 🎯 800px 컨테이너 전체 사용 */
+  margin-bottom: clamp(var(--space-8), 8vh, var(--space-12));
+  
+  font-size: clamp(var(--font-size-base), 2.5vw, var(--font-size-lg)); /* 16px → 18px */
+  line-height: var(--line-height-cjk); /* 1.6 */
+  color: var(--text-primary);
+}
+
+.magazine-detail__main-content p {
+  margin: 0 0 var(--space-4) 0;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* ===== 콘텐츠 섹션들 ===== */
+.magazine-detail__sections {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(var(--space-10), 10vh, var(--space-16)); /* 섹션 간 여백 */
+}
+
+.magazine-detail__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ===== 이미지 영역 ===== */
+.magazine-detail__image-figure,
+.magazine-detail__image-container {
+  position: relative;
+  height: 60vh; /* 🔧 fit-content에서 고정 높이로 변경 - 캡션 영역 무시 */
+  margin: 0;
+  overflow: hidden;
+  background-color: var(--bg-surface-hover);
+}
+
+.magazine-detail__image {
+  position: absolute; /* 🔧 absolute로 전체 영역 커버 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* 🔧 캡션 영역을 무시하고 전체 figure 높이 사용 */
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: var(--transition-transform);
+}
+
+.magazine-detail__image:hover {
+  transform: scale(1.02);
+}
+
+.magazine-detail__image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  padding: var(--space-3) var(--space-4);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.3)); /* 가독성을 위한 배경 */
+  
+  text-align: center;
+  color: white;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7); /* 가독성 향상 */
+  
+  margin-top: 0; /* 🔧 기존 margin 제거 */
+}
+
+.magazine-detail__image-caption-text {
+  display: block;
+  margin-bottom: var(--space-1);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.magazine-detail__image-caption .magazine-detail__image-source {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-style: italic;
+  position: static; /* 블록 버전은 오버레이 아니어야 함 */
+  background: none;
+  padding: 0;
+  text-shadow: none;
+}
+
+/* 이미지 출처 */
+.magazine-detail__image-source {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  padding: var(--space-3) var(--space-4);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.25));
+  
+  font-size: var(--font-size-xs);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wide);
+  
+  /* 여러 브랜드명 처리 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* ===== 섹션 콘텐츠 ===== */
+.magazine-detail__section-title {
+  font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-2xl)); /* 20px → 24px */
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  margin: 0;
+  
+  /* 🎯 800px 컨테이너 전체 사용 */
+  width: 100%;
+}
+
+.magazine-detail__section-content {
+  width: 100%; /* 🎯 800px 컨테이너 전체 사용 */
+  
+  font-size: clamp(var(--font-size-base), 2.5vw, var(--font-size-lg)); /* 16px → 18px */
+  line-height: var(--line-height-cjk); /* 1.6 */
+  color: var(--text-primary);
+}
+
+.magazine-detail__section-content p {
+  margin: 0 0 var(--space-4) 0;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 🆕 블록 기반 마크다운 렌더링 스타일 */
+.magazine-detail__section-content h1 {
+  font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-2xl));
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--text-primary);
+  margin: var(--space-6) 0 var(--space-4) 0;
+  word-break: keep-all;
+}
+
+.magazine-detail__section-content h2 {
+  font-size: clamp(var(--font-size-lg), 3vw, var(--font-size-xl));
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--text-primary);
+  margin: var(--space-5) 0 var(--space-3) 0;
+  word-break: keep-all;
+}
+
+.magazine-detail__section-content h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--text-primary);
+  margin: var(--space-4) 0 var(--space-2) 0;
+  word-break: keep-all;
+}
+
+.magazine-detail__section-content strong {
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.magazine-detail__section-content em {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.magazine-detail__section-content a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  transition: var(--transition-colors);
+}
+
+.magazine-detail__section-content a:hover {
+  color: var(--color-primary-hover);
+  text-decoration: none;
+}
+
+.magazine-detail__section-content a:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+
+/* ===== 크레딧 영역 ===== */
+.magazine-detail__credits {
+  margin-bottom: clamp(var(--space-12), 10vh, var(--space-16));
+  padding-top: clamp(var(--space-8), 6vh, var(--space-12));
+  border-top: 1px solid var(--border-light);
+}
+
+.magazine-detail__credits-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-6) 0;
+  font-style: italic; /* Elle 스타일 */
+}
+
+.magazine-detail__credits-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%; /* 🎯 800px 컨테이너 전체 사용 */
+}
+
+.magazine-detail__credit-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  gap: var(--space-4);
+  
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+}
+
+.magazine-detail__credit-role {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  min-width: 100px; /* 정렬을 위한 최소 너비 */
+  flex-shrink: 0;
+}
+
+.magazine-detail__credit-name {
+  font-weight: var(--font-weight-regular);
+  color: var(--text-primary);
+  flex: 1;
+}
+
+/* ===== 추천 매거진 영역 ===== */
+.magazine-detail__recommendations {
+  padding-top: clamp(var(--space-8), 6vh, var(--space-12));
+  border-top: 1px solid var(--border-light);
+}
+
+.magazine-detail__recommendations-title {
+  font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-2xl)); /* 20px → 24px */
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-8) 0;
+  text-align: center;
+}
+
+.magazine-detail__recommendations-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  
+  background-color: var(--bg-surface-hover);
+  border: 2px dashed var(--border-medium);
+  border-radius: var(--radius-lg);
+  
+  font-size: var(--font-size-base);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ===== 반응형 디자인 ===== */
+
+/* 🎯 간단한 모바일 반응형 */
+
+/* 태블릿: 1024px 이하에서는 90vw 사용 */
+@media (max-width: 1024px) {
+  .magazine-detail__container {
+    max-width: var(--magazine-detail-tablet-width); /* 90vw */
+  }
+}
+
+/* 모바일: 768px 이하에서는 95vw 사용 */
+@media (max-width: 768px) {
+  .magazine-detail__container {
+    max-width: var(--magazine-detail-mobile-width); /* 95vw */
+    padding: clamp(var(--space-6), 6vh, var(--space-10)) clamp(var(--space-4), 4vw, var(--space-6));
+  }
+  
+  .magazine-detail__header {
+    margin-bottom: clamp(var(--space-6), 6vh, var(--space-10));
+  }
+  
+  .magazine-detail__title {
+    font-size: clamp(var(--font-size-xl), 5vw, var(--font-size-2xl));
+  }
+  
+  .magazine-detail__sections {
+    gap: clamp(var(--space-8), 8vh, var(--space-12));
+  }
+  
+  .magazine-detail__section {
+    gap: var(--space-4);
+  }
+  
+  .magazine-detail__credits-list {
+    gap: var(--space-2);
+  }
+  
+  .magazine-detail__credit-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+  
+  .magazine-detail__credit-role {
+    min-width: auto;
+  }
+  
+  .magazine-detail__recommendations-grid {
+    grid-template-columns: 1fr; /* 모바일에서 1열 */
+    gap: var(--space-4);
+  }
+}
+
+/* 작은 모바일: 480px 이하 */
+@media (max-width: 480px) {
+  .magazine-detail__container {
+    max-width: 100vw; /* 작은 모바일에서는 최대 활용 */
+    padding: clamp(var(--space-4), 4vh, var(--space-8)) clamp(var(--space-3), 3vw, var(--space-4));
+  }
+  
+  .magazine-detail__title {
+    font-size: clamp(var(--font-size-lg), 4vw, var(--font-size-xl));
+  }
+  
+  .magazine-detail__sections {
+    gap: clamp(var(--space-6), 6vh, var(--space-10));
+  }
+}
+
+/* ===== 접근성 개선 ===== */
+
+/* 고대비 모드 지원 */
+@media (prefers-contrast: high) {
+  .magazine-detail__category {
+    background-color: var(--color-primary);
+    color: var(--text-on-primary);
+  }
+  
+  .magazine-detail__image-source {
+    background: rgba(0, 0, 0, 0.9);
+  }
+}
+
+/* 움직임 감소 선호 사용자 지원 */
+@media (prefers-reduced-motion: reduce) {
+  .magazine-detail__image {
+    transition: none;
+  }
+  
+  .magazine-detail__image:hover {
+    transform: none;
+  }
+}
+
+/* 포커스 관리 개선 */
+.magazine-detail__image:focus {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* ===== 추천 매거진 영역 ===== */
+.magazine-detail__recommendations {
+  margin-top: var(--space-20);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--border-light);
+}
+
+.magazine-detail__recommendations-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-6);
+}
+
+/* 추천 매거진 에러 상태 - 🚀 새로 추가 */
+.magazine-detail__recommendations-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  
+  background-color: var(--bg-surface-hover);
+  border: 2px dashed var(--border-medium);
+  border-radius: var(--radius-lg);
+  
+  font-size: var(--font-size-base);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.magazine-detail__recommendations-error .magazine-error-state__content {
+  max-width: 300px;
+}
+
+.magazine-detail__recommendations-error .magazine-error-state__description {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+/* 추천 매거진 그리드 - 🎯 1000px 기준 최적화 */
+.magazine-detail__recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 1000px에서 3개 줄 */
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}
+
+.magazine-detail__recommendation-item {
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition-all);
+  box-shadow: var(--shadow-sm);
+}
+
+.magazine-detail__recommendation-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.magazine-detail__recommendation-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.magazine-detail__recommendation-image {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background-color: var(--bg-surface-hover);
+}
+
+.magazine-detail__recommendation-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-transform);
+}
+
+.magazine-detail__recommendation-item:hover .magazine-detail__recommendation-image img {
+  transform: scale(1.05);
+}
+
+.magazine-detail__recommendation-content {
+  padding: var(--space-4);
+}
+
+.magazine-detail__recommendation-category {
+  font-size: var(--font-size-xs);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+}
+
+.magazine-detail__recommendation-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-2);
+  
+  /* 2줄 말줄임 */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.magazine-detail__recommendation-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  line-height: var(--line-height-normal);
+  margin-bottom: var(--space-3);
+  
+  /* 1줄 말줄임 */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.magazine-detail__recommendation-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+/* 플레이스홀더 스타일 */
+.magazine-detail__recommendations-placeholder {
+  text-align: center;
+  padding: var(--space-8);
+  color: var(--text-muted);
+  background-color: var(--bg-surface-hover);
+  border-radius: var(--radius-md);
+}
+
+/* 반응형: 모바일 */
+@media (max-width: 768px) {
+  .magazine-detail__recommendations-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+  
+  .magazine-detail__recommendation-content {
+    padding: var(--space-3);
+  }
+  
+  .magazine-detail__recommendation-title {
+    font-size: var(--font-size-base);
+  }
+}
+
+/* ===== 다크모드 준비 (향후 확장) ===== */
+@media (prefers-color-scheme: dark) {
+  .magazine-detail__category {
+    color: #FF8A8A; /* 다크모드에서 조금 더 밝은 빨강 */
+  }
+  
+  .magazine-detail__image-source {
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.4)); /* 다크모드도 더 은은하게 */
+  }
+}
