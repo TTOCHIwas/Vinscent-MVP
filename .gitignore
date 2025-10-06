@@ -1,7 +1,6 @@
 # dependencies
 /node_modules
 /.pnp
-
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -39,11 +38,21 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# storybook (개발 도구 - 배포 불필요)
+.storybook/
 *storybook.log
 storybook-static
+*.stories.tsx
+*.stories.ts
 
-# 실행 파일 (exe는 Git에서 제외)
+# 실행 파일
 *.exe
 
 # Claude 관련 (로컬 설정)
 .claude/
+
+# 데이터베이스 설계 파일 (배포 불필요)
+*.vuerd.json
+
+# 백업 파일
+*.backup
