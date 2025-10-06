@@ -44,3 +44,6 @@ storybook-static
 
 # 실행 파일 (exe는 Git에서 제외)
 *.exe
+
+# Claude 관련 (로컬 설정)
+.claude/
