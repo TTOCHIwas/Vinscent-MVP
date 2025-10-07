@@ -8,7 +8,7 @@ interface TextBlockProps {
   };
   onContentChange: (id: string, content: { markdown: string }) => void;
   onDelete: (id: string) => void;
-  onAddBlockAfter: (id: string) => void;
+  // 🔧 onAddBlockAfter 제거: Enter 키 자동 블록 추가 기능 제거됨
 }
 
 /**
@@ -20,8 +20,8 @@ const TextBlock: React.FC<TextBlockProps> = ({
   id,
   content,
   onContentChange,
-  onDelete,
-  onAddBlockAfter
+  onDelete
+  // 🔧 onAddBlockAfter 제거: 사용하지 않는 props 제거
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 

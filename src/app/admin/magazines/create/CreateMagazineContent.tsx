@@ -184,11 +184,7 @@ export default function CreateMagazineContent() {
     ));
   };
 
-  // 블록 후에 새 블록 추가
-  const addBlockAfter = (blockId: string) => {
-    setAddAfterBlockId(blockId);
-    setShowBlockTypeMenu(true);
-  };
+  // 🔧 addBlockAfter 함수 제거: Enter 키 자동 블록 추가 기능 제거로 불필요
 
   // 블록 타입 메뉴 닫기
   const closeBlockTypeMenu = () => {
@@ -491,23 +487,23 @@ export default function CreateMagazineContent() {
                 if (block.type === 'text') {
                   return (
                     <TextBlock
-                      key={block.id}
-                      id={block.id}
-                      content={block.content as TextBlockContent}
-                      onContentChange={updateBlockContent}
-                      onDelete={deleteBlock}
-                      onAddBlockAfter={addBlockAfter}
+                    key={block.id}
+                    id={block.id}
+                    content={block.content as TextBlockContent}
+                    onContentChange={updateBlockContent}
+                    onDelete={deleteBlock}
+                    // 🔧 onAddBlockAfter 제거: 자동 블록 추가 기능 제거
                     />
                   );
                 } else if (block.type === 'image') {
                   return (
                     <ImageBlock
-                      key={block.id}
-                      id={block.id}
-                      content={block.content as ImageBlockContent}
-                      onContentChange={updateBlockContent}
-                      onDelete={deleteBlock}
-                      onAddBlockAfter={addBlockAfter}
+                    key={block.id}
+                    id={block.id}
+                    content={block.content as ImageBlockContent}
+                    onContentChange={updateBlockContent}
+                    onDelete={deleteBlock}
+                    // 🔧 onAddBlockAfter 제거: 자동 블록 추가 기능 제거
                     />
                   );
                 }

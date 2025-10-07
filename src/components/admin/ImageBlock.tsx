@@ -9,7 +9,7 @@ interface ImageBlockProps {
   };
   onContentChange: (id: string, content: { imageUrl: string; imageSource: string }) => void;
   onDelete: (id: string) => void;
-  onAddBlockAfter: (id: string) => void; // 🔧 추가: 다음 블록 생성
+  // 🔧 onAddBlockAfter 제거: Enter 키 자동 블록 추가 기능 제거됨
 }
 
 /**
@@ -21,8 +21,8 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
   id,
   content,
   onContentChange,
-  onDelete,
-  onAddBlockAfter // 🔧 props에 추가
+  onDelete
+  // 🔧 onAddBlockAfter 제거: 사용하지 않는 props 제거
 }) => {
   const [isEditing, setIsEditing] = useState(!content.imageUrl);
   const [urlError, setUrlError] = useState('');
