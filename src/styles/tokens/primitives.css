@@ -88,21 +88,17 @@
   --color-white-trans: #ffffff50;
   --color-black: #000000;
 
-  /* 🔧 Overlay Opacity Scale - HeroSlide 전용 */
   --opacity-overlay-subtle: 0.1;
   --opacity-overlay-light: 0.15;
   --opacity-overlay-medium: 0.2;
   
-  /* 🔧 Interaction Opacity - Navigation 호버 효과 */
   --opacity-interaction-subtle: 0.02;
   --opacity-interaction-visible: 0.1;
   
-  /* 🔧 Border/Background Opacity - 특수 효과 */
   --opacity-border-subtle: 0.1;
   --opacity-border-medium: 0.3;
   --opacity-border-strong: 0.4;
   
-  /* 🔧 Animation Opacity - Skeleton 효과 */
   --opacity-skeleton-min: 0.4;
   --opacity-skeleton-max: 0.8;
 

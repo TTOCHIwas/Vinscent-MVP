@@ -134,7 +134,7 @@ export default function CreateMagazineContent() {
       }
       setIsInitialized(true);
     }
-  }, [isEditMode, magazineData, isInitialized, category, credits]);
+  }, [isEditMode, magazineData, isInitialized]);  // ✅ credits, category 제거
 
   // 블록 ID 생성
   const generateBlockId = () => `block-${Date.now()}-${Math.random()}`;

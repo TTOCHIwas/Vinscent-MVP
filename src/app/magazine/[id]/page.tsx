@@ -136,31 +136,31 @@ const MagazineDetailPage: React.FC<MagazineDetailPageProps> = async ({ params })
     console.error('[DEBUG] Magazine detail page error:', error);
     
     // 개발 모드에서는 에러 정보 표시
-    if (process.env.NODE_ENV === 'development') {
-      return (
-        <div className="magazine-detail">
-          <div className="magazine-detail__container">
-            <h1>Debug Error Information</h1>
-            <p><strong>Magazine ID:</strong> {id}</p>
-            <p><strong>Error:</strong> {error instanceof Error ? error.message : String(error)}</p>
-            <details>
-              <summary>Error Stack</summary>
-              <pre style={{ fontSize: '12px', overflow: 'auto' }}>
-                {error instanceof Error ? error.stack : 'No stack trace'}
-              </pre>
-            </details>
-            <details>
-              <summary>Debug Info</summary>
-              <ul>
-                <li>API URL: {process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/magazines/{id}</li>
-                <li>Node ENV: {process.env.NODE_ENV}</li>
-                <li>Magazine ID: {numericId}</li>
-              </ul>
-            </details>
-          </div>
-        </div>
-      );
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    //   return (
+    //     <div className="magazine-detail">
+    //       <div className="magazine-detail__container">
+    //         <h1>Debug Error Information</h1>
+    //         <p><strong>Magazine ID:</strong> {id}</p>
+    //         <p><strong>Error:</strong> {error instanceof Error ? error.message : String(error)}</p>
+    //         <details>
+    //           <summary>Error Stack</summary>
+    //           <pre style={{ fontSize: '12px', overflow: 'auto' }}>
+    //             {error instanceof Error ? error.stack : 'No stack trace'}
+    //           </pre>
+    //         </details>
+    //         <details>
+    //           <summary>Debug Info</summary>
+    //           <ul>
+    //             <li>API URL: {process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/magazines/{id}</li>
+    //             <li>Node ENV: {process.env.NODE_ENV}</li>
+    //             <li>Magazine ID: {numericId}</li>
+    //           </ul>
+    //         </details>
+    //       </div>
+    //     </div>
+    //   );
+    // }
     
     notFound();
   }

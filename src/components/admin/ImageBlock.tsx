@@ -55,11 +55,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
 
     setUrlError('');
     setIsEditing(false);
-    
-    // 🔧 이미지 확인 후 다음 블록 자동 추가 (UX 개선)
-    setTimeout(() => {
-      onAddBlockAfter(id);
-    }, 100);
+    // ✅ 자동 블록 추가 제거 - 사용자가 수동으로 추가
   };
 
   // 이미지 URL 변경

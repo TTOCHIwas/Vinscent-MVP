@@ -20,16 +20,16 @@
 }
 
 .magazine-detail__container {
-  max-width: var(--magazine-detail-max-width); /* 🎯 데스크톱 800px 고정 */
+  max-width: var(--magazine-detail-max-width);
   margin: 0 auto;
   padding: clamp(var(--space-6), 8vh, var(--space-12)) clamp(var(--space-4), 4vw, var(--space-8));
 }
 
 /* ===== 헤더 영역 ===== */
 .magazine-detail__header {
-  text-align: left; /* Elle Korea 스타일 - 왼쪽 정렬 */
+  text-align: left;
   margin-bottom: clamp(var(--space-8), 8vh, var(--space-16));
-  width: 100%; /* 🎯 800px 컨테이너 전체 사용 */
+  width: 100%;
 }
 
 /* 카테고리 배지 */
@@ -94,7 +94,6 @@
   color: var(--text-primary);
 }
 
-/* 🔧 브랜드 링크 스타일 */
 .magazine-detail__author-link {
   color: var(--color-primary);
   text-decoration: none;
@@ -150,12 +149,15 @@
 
 /* ===== 메인 콘텐츠 영역 ===== */
 .magazine-detail__content {
-  margin-bottom: clamp(var(--space-12), 10vh, var(--space-20));
+  display: flex;
+  flex-direction: column;
+  gap: clamp(var(--space-6), 10vh, var(--space-8)); /* 섹션 간 여백 */
+  margin-bottom: clamp(var(--space-12), 12vh, var(--space-20)); 
 }
 
 /* 메인 콘텐츠 텍스트 */
 .magazine-detail__main-content {
-  width: 100%; /* 🎯 800px 컨테이너 전체 사용 */
+  width: 100%;
   margin-bottom: clamp(var(--space-8), 8vh, var(--space-12));
   
   font-size: clamp(var(--font-size-base), 2.5vw, var(--font-size-lg)); /* 16px → 18px */
@@ -173,32 +175,31 @@
 .magazine-detail__sections {
   display: flex;
   flex-direction: column;
-  gap: clamp(var(--space-10), 10vh, var(--space-16)); /* 섹션 간 여백 */
+  gap: clamp(var(--space-6), 10vh, var(--space-8)); /* 섹션 간 여백 */
+  margin-bottom: clamp(var(--space-10), 10vh, var(--space-16)); /* 마지막 블록과 Credit 사이 간격 */
 }
 
 .magazine-detail__section {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
 }
 
 /* ===== 이미지 영역 ===== */
 .magazine-detail__image-figure,
 .magazine-detail__image-container {
   position: relative;
-  height: 60vh; /* 🔧 fit-content에서 고정 높이로 변경 - 캡션 영역 무시 */
+  width: 100%; 
+  height: auto; /* 이미지 비율에 맞춰 자동 조정 */
   margin: 0;
   overflow: hidden;
   background-color: var(--bg-surface-hover);
 }
 
 .magazine-detail__image {
-  position: absolute; /* 🔧 absolute로 전체 영역 커버 */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; /* 🔧 캡션 영역을 무시하고 전체 figure 높이 사용 */
-  object-fit: cover;
+  position: relative; /* 🔧 relative로 자연스러운 레이아웃 */
+  width: 100%; /* 🔧 가로 너비 최대 */
+  height: auto; /* 🔧 이미지 원본 비율 유지 */
+  object-fit: contain; /* 🔧 이미지 전체 표시 */
   object-position: center;
   display: block;
   transition: var(--transition-transform);
@@ -274,15 +275,12 @@
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-wide);
   margin: 0;
-  
-  /* 🎯 800px 컨테이너 전체 사용 */
   width: 100%;
 }
 
 .magazine-detail__section-content {
-  width: 100%; /* 🎯 800px 컨테이너 전체 사용 */
-  
-  font-size: clamp(var(--font-size-base), 2.5vw, var(--font-size-lg)); /* 16px → 18px */
+  width: 100%;
+  font-size: clamp(var(--font-size-base), 2.5vw, var(--font-size-lg));
   line-height: var(--line-height-cjk); /* 1.6 */
   color: var(--text-primary);
 }
@@ -293,7 +291,6 @@
   overflow-wrap: break-word;
 }
 
-/* 🆕 블록 기반 마크다운 렌더링 스타일 */
 .magazine-detail__section-content h1 {
   font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-2xl));
   font-weight: var(--font-weight-bold);
@@ -351,7 +348,7 @@
 /* ===== 크레딧 영역 ===== */
 .magazine-detail__credits {
   margin-bottom: clamp(var(--space-12), 10vh, var(--space-16));
-  padding-top: clamp(var(--space-8), 6vh, var(--space-12));
+  padding-top: var(--space-4);
   border-top: 1px solid var(--border-light);
 }
 
@@ -367,7 +364,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  width: 100%; /* 🎯 800px 컨테이너 전체 사용 */
+  width: 100%;
 }
 
 .magazine-detail__credit-item {
@@ -383,7 +380,7 @@
 .magazine-detail__credit-role {
   font-weight: var(--font-weight-medium);
   color: var(--text-secondary);
-  min-width: 100px; /* 정렬을 위한 최소 너비 */
+  min-width: 100px;
   flex-shrink: 0;
 }
 
@@ -400,7 +397,7 @@
 }
 
 .magazine-detail__recommendations-title {
-  font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-2xl)); /* 20px → 24px */
+  font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-2xl));
   font-weight: var(--font-weight-bold);
   color: var(--text-primary);
   margin: 0 0 var(--space-8) 0;
@@ -423,8 +420,6 @@
 }
 
 /* ===== 반응형 디자인 ===== */
-
-/* 🎯 간단한 모바일 반응형 */
 
 /* 태블릿: 1024px 이하에서는 90vw 사용 */
 @media (max-width: 1024px) {

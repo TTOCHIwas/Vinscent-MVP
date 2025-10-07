@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
       if (result.success && result.data) {
         return NextResponse.json({
           success: true,
-          count: result.data.count,
+          data: { count: result.data.count },  // ✅ 구조 통일
           adminRole: role,
         });
       } else {
@@ -82,7 +82,7 @@ export async function GET(request: NextRequest) {
       
       return NextResponse.json({
         success: true,
-        magazines: paginatedMagazines,
+        data: paginatedMagazines,  // ✅ 'data' 필드로 통일
         pagination: {
           page,
           limit,

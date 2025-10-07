@@ -28,6 +28,7 @@ export async function createMagazine(data: CreateMagazineData): Promise<ApiRespo
       return { success: false, error: 'Brand name is required' };
     }
     
+    // ✅ PostgreSQL: .returning()으로 삽입된 행 반환
     const magazineResult = await db.insert(magazines).values({
       title: data.title.trim(),
       subtitle: data.subtitle?.trim() || null,
@@ -38,9 +39,9 @@ export async function createMagazine(data: CreateMagazineData): Promise<ApiRespo
       brandUrl: data.brandUrl?.trim() || null,
       viewCount: 0,
       credits: data.credits ? JSON.stringify(data.credits) : null,
-    });
+    }).returning({ id: magazines.id });
 
-    const magazineId = Number(magazineResult[0].insertId);
+    const magazineId = magazineResult[0].id;
     console.log('[DEBUG] Magazine created with ID:', magazineId);
 
     if (data.blocks && data.blocks.length > 0) {
@@ -74,6 +75,7 @@ export async function updateMagazine(id: number, data: UpdateMagazineData): Prom
   try {
     console.log('[DEBUG] Updating magazine:', id);
     
+    // ✅ PostgreSQL: updatedDate 명시적 추가
     await db.update(magazines)
       .set({
         title: data.title,
@@ -122,10 +124,12 @@ export async function deleteMagazine(id: number): Promise<ApiResponse> {
     
     await db.delete(magazineBlocks).where(eq(magazineBlocks.magazineId, id));
     
+    // ✅ PostgreSQL: .returning()으로 삭제된 행 반환
     const deletedResult = await db.delete(magazines)
-      .where(eq(magazines.id, id));
+      .where(eq(magazines.id, id))
+      .returning({ id: magazines.id });
     
-    if (deletedResult[0].affectedRows > 0) {
+    if (deletedResult.length > 0) {
       console.log('[DEBUG] Magazine deleted successfully:', id);
       return { 
         success: true, 

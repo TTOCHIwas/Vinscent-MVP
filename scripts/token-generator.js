@@ -27,24 +27,19 @@ const TEAM_INFO = {
     birthDate: process.env.DEV_BIRTH || '20020317',
     phoneLastFour: process.env.DEV_PHONE || '01092034239',
   },
-  designer: {
-    role: 'designer',
-    birthDate: process.env.DESIGN_BIRTH || '00000000',
-    phoneLastFour: process.env.DESIGN_PHONE || '00000000000',
-  },
   marketing: {
     role: 'marketing',
-    birthDate: process.env.MARKETING_BIRTH || '00000000',
-    phoneLastFour: process.env.MARKETING_PHONE || '00000000000',
+    birthDate: process.env.MARKETING_BIRTH || '20030408',
+    phoneLastFour: process.env.MARKETING_PHONE || '01025127854',
   },
   pm: {
     role: 'pm',
-    birthDate: process.env.PM_BIRTH || '00000000',
-    phoneLastFour: process.env.PM_PHONE || '00000000000',
+    birthDate: process.env.PM_BIRTH || '20011121',
+    phoneLastFour: process.env.PM_PHONE || '01071489971',
   },
 };
 
-const PROJECT_SECRET = process.env.PROJECT_SECRET || 'vinscent_mvp_2025_secret_key';
+const PROJECT_SECRET = process.env.PROJECT_SECRET || 'vinscent_naver_give_up_secret_key';
 
 /**
  * 일일 토큰 생성 함수 (서버와 100% 동일)

@@ -34,8 +34,12 @@ const MagazineBlockRenderer: React.FC<MagazineBlockRendererProps> = ({
       .replace(/^# (.*$)/gim, '<h1>$1</h1>')
       // [링크텍스트](URL) → <a href="URL">링크텍스트</a>
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-      // \n → <br>
-      .replace(/\n/g, '<br>');
+      // 🔧 빈 줄 (\n\n) → <br> 하나로 (문단 구분)
+      .replace(/\n\n+/g, '<br>')
+      // 🔧 단일 줄바꿈 (\n) → 공백으로 (같은 문단 내)
+      .replace(/\n/g, ' ')
+      // 🔧 제목 태그 뒤 불필요한 <br> 제거
+      .replace(/<\/(h[1-3])><br>/g, '</$1>');
   };
 
   return (

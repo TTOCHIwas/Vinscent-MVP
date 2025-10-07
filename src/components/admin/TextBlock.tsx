@@ -46,11 +46,8 @@ const TextBlock: React.FC<TextBlockProps> = ({
 
   // 키보드 이벤트 처리
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    // Enter키로 새 블록 추가 (Shift+Enter는 줄바꿈)
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      onAddBlockAfter(id);
-    }
+    // 🔧 Enter 키 블록 추가 기능 제거 (ImageBlock과 일관성 유지)
+    // Enter 키는 기본 동작(줄바꿈)만 수행
     
     // 빈 블록에서 Backspace로 삭제
     if (e.key === 'Backspace' && content.markdown === '') {
@@ -89,7 +86,7 @@ const TextBlock: React.FC<TextBlockProps> = ({
 
       {/* 마크다운 힌트 (포커스시 표시) */}
       <div className="block-hint">
-        💡 **굵게**, *기울임*, # 제목, [링크](URL) 지원 | Enter: 새 블록 | Shift+Enter: 줄바꿈
+        💡 **굵게**, *기울임*, # 제목, [링크](URL) 지원 | 마크다운 문법 사용 가능
       </div>
     </div>
   );

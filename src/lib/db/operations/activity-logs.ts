@@ -133,10 +133,11 @@ export async function cleanupOldActivityLogs() {
       .delete(adminActivityLogs)
       .where(
         lt(adminActivityLogs.timestamp, thirtyDaysAgo)
-      );
+      )
+      .returning({ id: adminActivityLogs.id });
     
-    // Drizzle ORM MySQL delete 결과는 배열 형태로 반환됨
-    const deletedCount = result[0]?.affectedRows || 0;
+    // PostgreSQL: 삭제된 행들을 반환받아 개수 계산
+    const deletedCount = result.length;
     
     console.log(`[CLEANUP] ${deletedCount}개의 오래된 활동 로그 삭제됨`);
     

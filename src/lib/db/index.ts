@@ -1,13 +1,11 @@
-import { drizzle } from 'drizzle-orm/mysql2';
-import mysql from 'mysql2/promise';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 import * as schema from './schema';
 
-// MySQL 연결 설정 
-const connection = mysql.createPool({
-  uri: process.env.DATABASE_URL,
-  connectionLimit: 10,
-  queueLimit: 0,
-  charset: 'utf8mb4',
-});
+// PostgreSQL 연결 설정
+const connectionString = process.env.DATABASE_URL!;
 
-export const db = drizzle(connection, { schema, mode: 'default' });
+// Disable prefetch as it is not supported for "Transaction" pool mode
+const client = postgres(connectionString, { prepare: false });
+
+export const db = drizzle(client, { schema });
