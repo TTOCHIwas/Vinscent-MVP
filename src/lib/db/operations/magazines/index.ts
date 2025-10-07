@@ -3,7 +3,8 @@ export {
   getLatestMagazineCards,
   getTopMagazineCards, 
   getPublishedMagazineCardById,
-  getPublishedMagazineCards
+  getPublishedMagazineCards,
+  getPublishedMagazineIds // 🔧 추가: generateStaticParams용
 } from './cards';
 
 // 전체 데이터 조회 그룹 (블록 데이터 포함)

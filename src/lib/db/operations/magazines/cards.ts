@@ -122,6 +122,30 @@ export async function getPublishedMagazineCardById(id: number): Promise<ApiRespo
 }
 
 /**
+ * 발행된 매거진 ID 목록 조회 (generateStaticParams용)
+ * @description 빌드 시 정적 페이지 생성을 위한 ID 목록
+ */
+export async function getPublishedMagazineIds(): Promise<number[]> {
+  try {
+    console.log('[DEBUG] Getting published magazine IDs for static generation');
+    
+    const results = await db
+      .select({ id: magazines.id })
+      .from(magazines)
+      .where(eq(magazines.status, 'published'))
+      .orderBy(desc(magazines.publishedDate));
+    
+    const ids = results.map(r => r.id);
+    console.log('[DEBUG] Found published magazine IDs:', ids);
+    
+    return ids;
+  } catch (error) {
+    console.error('[ERROR] getPublishedMagazineIds failed:', error);
+    return [];
+  }
+}
+
+/**
  * 발행된 매거진 카드 조회 (리스트용)
  * @description 페이지네이션 지원
  */

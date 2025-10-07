@@ -7,38 +7,60 @@ import MagazineBlockRenderer from '@/components/features/magazine-detail/Magazin
 import MagazineCredits from '@/components/features/magazine-detail/MagazineCredits';
 import MagazineRecommendations from '@/components/features/magazine-detail/MagazineRecommendations';
 
+// 🔧 데이터베이스 직접 접근 (서버 컴포넌트)
+import { getMagazineById } from '@/lib/db/operations/magazines';
+
 interface MagazineDetailPageProps {
   params: Promise<{
     id: string;
   }>;
 }
 
-// 실제 API에서 매거진 데이터 가져오기
+// 🔧 generateStaticParams: 빌드 시 매거진 ID 목록 제공
+export async function generateStaticParams() {
+  try {
+    // 발행된 매거진 ID 목록 가져오기
+    const { getPublishedMagazineIds } = await import('@/lib/db/operations/magazines');
+    const ids = await getPublishedMagazineIds();
+    
+    console.log('[DEBUG] generateStaticParams - Magazine IDs:', ids);
+    
+    return ids.map((id) => ({
+      id: String(id),
+    }));
+  } catch (error) {
+    console.error('[DEBUG] generateStaticParams failed:', error);
+    // 빌드 실패 방지
+    return [];
+  }
+}
+
+// 🔧 수정: 데이터베이스 직접 접근 (API 호출 대신)
 const getMagazineData = async (id: string) => {
   try {
     console.log('[DEBUG] Fetching magazine data for ID:', id);
     
-    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/magazines/${id}`, {
-      cache: 'no-store', // 항상 최신 데이터 가져오기
+    const numericId = parseInt(id);
+    if (isNaN(numericId) || numericId <= 0) {
+      throw new Error('Invalid magazine ID');
+    }
+    
+    // 데이터베이스에서 직접 가져오기
+    const result = await getMagazineById(numericId);
+    
+    // ApiResponse 언랩
+    if (!result.success || !result.data) {
+      throw new Error(result.error || 'Magazine not found');
+    }
+    
+    const magazine = result.data;
+    
+    console.log('[DEBUG] Magazine data loaded:', {
+      title: magazine.title,
+      blocksCount: magazine.blocks?.length || 0
     });
     
-    console.log('[DEBUG] API Response status:', response.status);
-    
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('[DEBUG] API Response error:', response.status, errorText);
-      throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
-    }
-    
-    const result = await response.json();
-    console.log('[DEBUG] API Response data:', JSON.stringify(result, null, 2));
-    
-    if (!result.success) {
-      console.error('[DEBUG] API returned success: false, error:', result.error);
-      throw new Error(result.error || 'Failed to fetch magazine');
-    }
-    
-    return result.magazine;
+    return magazine;
   } catch (error) {
     console.error('[DEBUG] getMagazineData failed:', error);
     throw error;
@@ -104,12 +126,6 @@ const MagazineDetailPage: React.FC<MagazineDetailPageProps> = async ({ params })
                   }}>
                     매거진 콘텐츠가 없습니다.
                   </p>
-                  {process.env.NODE_ENV === 'development' && (
-                    <details style={{ marginTop: '1rem', fontSize: '12px' }}>
-                      <summary> 개발자 디버그 정보</summary>
-                      <pre>{JSON.stringify(magazine, null, 2)}</pre>
-                    </details>
-                  )}
                 </div>
               </div>
             </div>
@@ -134,34 +150,6 @@ const MagazineDetailPage: React.FC<MagazineDetailPageProps> = async ({ params })
     
   } catch (error) {
     console.error('[DEBUG] Magazine detail page error:', error);
-    
-    // 개발 모드에서는 에러 정보 표시
-    // if (process.env.NODE_ENV === 'development') {
-    //   return (
-    //     <div className="magazine-detail">
-    //       <div className="magazine-detail__container">
-    //         <h1>Debug Error Information</h1>
-    //         <p><strong>Magazine ID:</strong> {id}</p>
-    //         <p><strong>Error:</strong> {error instanceof Error ? error.message : String(error)}</p>
-    //         <details>
-    //           <summary>Error Stack</summary>
-    //           <pre style={{ fontSize: '12px', overflow: 'auto' }}>
-    //             {error instanceof Error ? error.stack : 'No stack trace'}
-    //           </pre>
-    //         </details>
-    //         <details>
-    //           <summary>Debug Info</summary>
-    //           <ul>
-    //             <li>API URL: {process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/magazines/{id}</li>
-    //             <li>Node ENV: {process.env.NODE_ENV}</li>
-    //             <li>Magazine ID: {numericId}</li>
-    //           </ul>
-    //         </details>
-    //       </div>
-    //     </div>
-    //   );
-    // }
-    
     notFound();
   }
 };
