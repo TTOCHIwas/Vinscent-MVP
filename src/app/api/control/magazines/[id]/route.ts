@@ -173,15 +173,24 @@ export async function PUT(
       
       // 🔧 추가: 일반 사용자 매거진 캐시 재검증
       try {
+        console.log(`[REVALIDATE] 시작: magazineId=${magazineId}`);
+        
         // 1. 매거진 상세 페이지 재검증
         revalidatePath(`/magazine/${magazineId}`, 'page');
+        console.log(`[REVALIDATE] 성공: /magazine/${magazineId}`);
         
         // 2. 메인 페이지 재검증 (히어로/캐러셀 데이터 갱신)
         revalidatePath('/', 'page');
+        console.log(`[REVALIDATE] 성공: /`);
         
-        console.log(`[DEBUG] 캐시 재검증 완료: /magazine/${magazineId}`);
+        console.log(`[REVALIDATE] 완료: 모든 경로 재검증 성공`);
       } catch (revalidateError) {
-        console.error('[ERROR] revalidatePath 실패:', revalidateError);
+        console.error('[REVALIDATE ERROR] 실패:', {
+          error: revalidateError,
+          message: revalidateError instanceof Error ? revalidateError.message : '알 수 없는 오류',
+          stack: revalidateError instanceof Error ? revalidateError.stack : 'No stack',
+          magazineId
+        });
         // 재검증 실패해도 수정은 성공으로 처리
       }
       

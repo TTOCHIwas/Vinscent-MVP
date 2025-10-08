@@ -35,6 +35,12 @@ export async function generateStaticParams() {
   }
 }
 
+// 🔧 하이브리드 접근: ISR + 짧은 재검증 주기
+// - revalidatePath 성공 시: 즉시 반영
+// - revalidatePath 실패 시: 최대 10초 후 반영
+// - 성능: 대부분 캐시 사용
+export const revalidate = 10;
+
 // 🔧 수정: 데이터베이스 직접 접근 (API 호출 대신)
 const getMagazineData = async (id: string) => {
   try {
