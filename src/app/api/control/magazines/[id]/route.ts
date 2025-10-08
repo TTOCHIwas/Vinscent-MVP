@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';  // 🔧 추가: 캐시 재검증
 import { getMagazineById } from '@/lib/db/operations/magazines/content';
 import { 
   updateMagazine, 
@@ -170,6 +171,20 @@ export async function PUT(
         }
       });
       
+      // 🔧 추가: 일반 사용자 매거진 캐시 재검증
+      try {
+        // 1. 매거진 상세 페이지 재검증
+        revalidatePath(`/magazine/${magazineId}`, 'page');
+        
+        // 2. 메인 페이지 재검증 (히어로/캐러셀 데이터 갱신)
+        revalidatePath('/', 'page');
+        
+        console.log(`[DEBUG] 캐시 재검증 완료: /magazine/${magazineId}`);
+      } catch (revalidateError) {
+        console.error('[ERROR] revalidatePath 실패:', revalidateError);
+        // 재검증 실패해도 수정은 성공으로 처리
+      }
+      
       return NextResponse.json({
         success: true,
         message: 'Magazine updated successfully',
@@ -249,6 +264,23 @@ export async function DELETE(
           brandName: 'unknown'
         }
       });
+      
+      // 🔧 추가: 매거진 삭제 시 캐시 재검증
+      try {
+        // 1. 삭제된 매거진 상세 페이지 재검증
+        revalidatePath(`/magazine/${magazineId}`, 'page');
+        
+        // 2. 메인 페이지 재검증
+        revalidatePath('/', 'page');
+        
+        // 3. 매거진 리스트 페이지 재검증
+        revalidatePath('/magazine', 'page');
+        
+        console.log(`[DEBUG] 캐시 재검증 완료: /magazine/${magazineId} 삭제`);
+      } catch (revalidateError) {
+        console.error('[ERROR] revalidatePath 실패:', revalidateError);
+        // 재검증 실패해도 삭제는 성공으로 처리
+      }
       
       return NextResponse.json({
         success: true,
