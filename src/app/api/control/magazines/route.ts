@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';  // 🔧 추가: 캐시 재검증
 import { getAllMagazines } from '@/lib/db/operations/magazines/content';
 import { createMagazine } from '@/lib/db/operations/magazines/management';
 import { getMagazineCount } from '@/lib/db/operations/magazines/statistics';
@@ -270,6 +271,23 @@ export async function POST(request: NextRequest) {
           brandName: result.data.brandName
         }
       });
+      
+      // 🔧 추가: 새 매거진 생성 시 캐시 재검증
+      try {
+        // 1. 새 매거진 상세 페이지 생성
+        revalidatePath(`/magazine/${result.data.id}`, 'page');
+        
+        // 2. 메인 페이지 재검증 (히어로/캐러셀 데이터 갱신)
+        revalidatePath('/', 'page');
+        
+        // 3. 매거진 리스트 페이지 재검증
+        revalidatePath('/magazine', 'page');
+        
+        console.log(`[DEBUG] 캐시 재검증 완료: /magazine/${result.data.id}`);
+      } catch (revalidateError) {
+        console.error('[ERROR] revalidatePath 실패:', revalidateError);
+        // 재검증 실패해도 생성은 성공으로 처리
+      }
       
       console.log('[DEBUG] Block-based magazine created successfully:', result.data.id);
       
