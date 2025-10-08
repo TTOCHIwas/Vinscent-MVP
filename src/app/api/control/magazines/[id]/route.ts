@@ -40,7 +40,7 @@ export async function GET(
     if (result.success && result.data) {
       return NextResponse.json({
         success: true,
-        magazine: result.data,
+        data: result.data,  // 🔧 수정: magazine → data (타입 일관성)
         adminRole: role,
         timestamp: new Date().toISOString(),
       });
@@ -173,7 +173,7 @@ export async function PUT(
       return NextResponse.json({
         success: true,
         message: 'Magazine updated successfully',
-        magazine: result.data,
+        data: result.data,  // 🔧 수정: magazine → data
         updatedBy: role,
         timestamp: new Date().toISOString(),
       });
